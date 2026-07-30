@@ -1,6 +1,6 @@
-'use no memo'
+'use no memo';
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 /**
  * 1-1 trigger → render → commit
@@ -10,24 +10,25 @@ import { useEffect, useState } from 'react'
  *   ここでは順序を見せるためにあえて置いている。
  */
 function Panel({ label }: { label: string }) {
-  console.log(`[render] ${label}`)
+  console.log(`[render] ${label}`);
 
   useEffect(() => {
-    console.log(`[commit] ${label} — DOMに反映された`)
-  })
+    console.log(`[commit] ${label} — DOMに反映された`);
+  });
 
-  return <div className="panel">{label}</div>
+  return <div className="panel">{label}</div>;
 }
 
 export default function ThreePhases() {
-  const [count, setCount] = useState(0)
-  const [mounted, setMounted] = useState(true)
+  const [count, setCount] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   return (
     <div className="page">
       <h1>1-1 trigger → render → commit</h1>
       <p className="muted">
-        DevToolsのConsoleを開いた状態で操作すると、render が先に走り commit が後から来ることが読める。
+        DevToolsのConsoleを開いた状態で操作すると、render が先に走り commit
+        が後から来ることが読める。
       </p>
 
       <div className="toolbar" style={{ marginBottom: 16 }}>
@@ -41,5 +42,5 @@ export default function ThreePhases() {
 
       {mounted && <Panel label={`カウント ${count}`} />}
     </div>
-  )
+  );
 }
