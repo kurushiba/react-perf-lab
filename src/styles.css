@@ -1,0 +1,338 @@
+/* 業務アプリらしく見える最小限のスタイル。教材の主題ではないので凝らない。 */
+
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --border: #dfe1e6;
+  --text: #172b4d;
+  --muted: #6b778c;
+  --accent: #0b6bcb;
+  --accent-weak: #e7f0fb;
+  --danger: #c9372c;
+  --ok: #1f845a;
+  font-family: system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+h2 {
+  font-size: 16px;
+  margin: 0;
+}
+h3 {
+  font-size: 14px;
+  margin: 0 0 8px;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  background: #eef0f3;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+a {
+  color: var(--accent);
+}
+
+/* --- ラボ一覧 ---------------------------------------------------------- */
+
+.page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+.lead {
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+
+.lab-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.lab-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.lab-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lab-card__summary {
+  margin: 8px 0 4px;
+  color: var(--muted);
+}
+
+.lab-card__path {
+  margin: 0 0 12px;
+}
+
+.lab-card__variants {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: var(--accent-weak);
+  color: var(--accent);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.button {
+  display: inline-block;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.button--disabled {
+  color: #a5adba;
+  background: #f4f5f7;
+  cursor: not-allowed;
+}
+
+.button--disabled:hover {
+  border-color: var(--border);
+  color: #a5adba;
+}
+
+/* --- ラボの外枠 -------------------------------------------------------- */
+
+.lab-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #172b4d;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.lab-bar__home {
+  color: #9fc4f0;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lab-bar__title {
+  font-weight: 600;
+  flex: 1;
+}
+
+.lab-bar__variants {
+  display: flex;
+  gap: 6px;
+}
+
+.chip {
+  border: 1px solid #42526e;
+  border-radius: 999px;
+  padding: 2px 12px;
+  color: #c1c7d0;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.chip--active {
+  background: #fff;
+  color: #172b4d;
+  border-color: #fff;
+}
+
+/* --- 汎用パーツ -------------------------------------------------------- */
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.note {
+  background: #fffae6;
+  border: 1px solid #ffe380;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 0 0 16px;
+}
+
+input[type='text'],
+input[type='search'],
+input[type='number'],
+select {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font: inherit;
+  background: var(--surface);
+}
+
+button {
+  font: inherit;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background: var(--surface);
+}
+
+/* --- 一覧の行（04-inventory / 05-search で共用） -------------------------
+   1行 = 10 要素ノード。10,000行で約10万ノードになる。
+   高さを 44px に固定してあるのは、仮想化の estimateSize と揃えるため。 */
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* 説明文つきの行は折り返しで高さが変わる（6-4 の可変高さ） */
+.row--auto {
+  height: auto;
+  align-items: flex-start;
+  padding: 8px 10px;
+}
+
+.row__main {
+  flex: 1;
+  min-width: 0;
+}
+
+.row__name {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.row--auto .row__name {
+  white-space: normal;
+}
+
+.row__sub {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.row__num {
+  width: 92px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.row__stock {
+  width: 78px;
+  text-align: right;
+  color: var(--ok);
+}
+
+.row__stock--out {
+  color: var(--danger);
+}
+
+.list-scroll {
+  height: 520px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.metrics {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.metrics__value {
+  font-size: 20px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.metrics__label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.bar {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--accent);
+  min-width: 2px;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 6px 10px;
+  text-align: left;
+  font-size: 13px;
+}
+
+th {
+  background: #fafbfc;
+  color: var(--muted);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
