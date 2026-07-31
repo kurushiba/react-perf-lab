@@ -13,8 +13,6 @@ export interface FeedStats {
   activeAuthors: number
   trendingTags: { tag: string; count: number }[]
   hotPosts: { id: string; authorName: string; score: number }[]
-  /** 実測した集計時間（ms）。UIにもそのまま出す */
-  elapsedMs: number
 }
 
 /** 4文字以上の語とハッシュタグだけを、出現順そのままで取り出す */
@@ -96,6 +94,5 @@ export function computeFeedStats(
     activeAuthors: authors.size,
     trendingTags,
     hotPosts,
-    elapsedMs,
   }
 }

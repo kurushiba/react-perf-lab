@@ -33,7 +33,6 @@ export default function Header({ stats, visibleCount }: HeaderProps) {
         <Stat label="コメント合計" value={stats.totalComments.toLocaleString()} />
         <Stat label="1投稿あたり" value={`${commentsPerPost} 件`} />
         <Stat label="投稿している人" value={`${stats.activeAuthors} 人`} />
-        <Stat label="集計にかかった時間" value={`${stats.elapsedMs.toFixed(1)} ms`} />
       </div>
 
       <div className="toolbar" style={{ marginTop: 12 }}>

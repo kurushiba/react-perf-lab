@@ -9,7 +9,7 @@
  */
 import { useState } from 'react'
 import { postComments, posts } from '../../../data/posts'
-import { countByTab, POPULAR_THRESHOLD, type TabId } from '../filter'
+import { countByTab, filterPosts, type TabId } from '../filter'
 import { computeFeedStats } from '../stats'
 import CommentBox from './CommentBox'
 import Header from './Header'
@@ -37,14 +37,7 @@ export default function FeedApp() {
   const [unreadCount, setUnreadCount] = useState(12)
 
   // before の useMemo は削除。tab が変わらない限り Compiler が結果を持ち回す。
-  // 絞り込みはこのコンポーネントの中に直接書く（Compiler が式を追える形にしておく）
-  const visiblePosts = posts.filter(
-    (post) =>
-      tab === 'all' ||
-      (tab === 'following' && post.isFollowing) ||
-      (tab === 'popular' && post.likeCount >= POPULAR_THRESHOLD) ||
-      (tab === 'media' && post.imageUrl !== null),
-  )
+  const visiblePosts = filterPosts(posts, tab)
 
   // これは Compiler が入っても likes が変わるたびに必ず走る（4-3）。
   // メモ化は「2回目以降を飛ばす」技術で、1回の計算そのものは軽くならない。
