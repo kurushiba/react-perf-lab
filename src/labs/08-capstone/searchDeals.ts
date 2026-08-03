@@ -6,7 +6,7 @@ import { matchesFilters, type Filters } from './types'
  * 索引を持たないので、1打鍵ごとに 5,000 件すべてを走査してスコアを付け直す。
  *
  * ★ before と after で共有している。after でもこの関数は1行も変えない。
- *   直すのは「いつ走らせるか」であって「何をするか」ではない、というのが 10-6 の主題。
+ *   直すのは「いつ走らせるか」であって「何をするか」ではない、というのが 9-6 の主題。
  */
 export function searchDeals(filters: Filters): Deal[] {
   const startedAt = performance.now()

@@ -19,7 +19,7 @@ export default function SearchAfter() {
   const [tab, setTab] = useState<TabId>('results')
   const [history, setHistory] = useState<string[]>([])
 
-  // ①回数を減らす（7-4）と ②後回しにする（7-6）を切り替えて比べる
+  // ①回数を減らす（6-4）と ②後回しにする（6-6）を切り替えて比べる
   const debouncedQuery = useDebouncedValue(query, 250)
   const deferredQuery = useDeferredValue(query)
   const searchQuery = mode === 'debounce' ? debouncedQuery : deferredQuery
@@ -27,7 +27,7 @@ export default function SearchAfter() {
   // 索引を引くだけなので、1打鍵あたり 1ms 前後で終わる
   const results = searchProducts(searchQuery, filters)
 
-  // ③別スレッドへ逃がす（7-7）。重い集計はメインスレッドを一切止めない
+  // ③別スレッドへ逃がす（6-7）。重い集計はメインスレッドを一切止めない
   const summary = useAggregate(searchQuery, filters)
 
   const sentCount = useAnalytics(query, filters, results.length, tab)

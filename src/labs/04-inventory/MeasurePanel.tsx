@@ -15,7 +15,7 @@ interface MeasurePanelProps {
 }
 
 /**
- * 6-1 / 6-3 で読む3つの数値のうち、ブラウザを開かなくても分かる2つを画面に出す。
+ * 5-1 / 5-3 で読む3つの数値のうち、ブラウザを開かなくても分かる2つを画面に出す。
  * （残りのFPSは Performance パネルで測る）
  *
  * - DOMノード数：Elements パネルで数えるのと同じ `document.querySelectorAll('*').length`

@@ -22,7 +22,7 @@ export default function ProductList({ selectedId, onSelect }: ProductListProps) 
             background: item.id === selectedId ? 'var(--accent-weak)' : undefined,
           }}
           // マウスが乗った時点で詳細を取りに行く。
-          // 実際の通信時間は変わらないが、クリックした時にはもう届いている（9-5）
+          // 実際の通信時間は変わらないが、クリックした時にはもう届いている（8-5）
           onMouseEnter={() => void queryClient.prefetchQuery(productDetailQuery(item.id))}
           onClick={() => onSelect(item.id)}
         >

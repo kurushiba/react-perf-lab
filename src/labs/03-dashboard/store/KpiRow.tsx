@@ -7,7 +7,7 @@ interface KpiCardProps {
   kpi: Kpi
 }
 
-// 展開状態はカード自身が持つ（5-2）。ストアに置く必要はない
+// 展開状態はカード自身が持つ（4-2）。ストアに置く必要はない
 function KpiCard({ kpi }: KpiCardProps) {
   console.log('[render] KpiCard', kpi.id)
 

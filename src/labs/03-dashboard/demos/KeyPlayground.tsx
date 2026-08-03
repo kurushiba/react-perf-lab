@@ -47,7 +47,7 @@ export default function KeyPlayground() {
     <div className="page" style={{ maxWidth: 720 }}>
       <h1>key で何が変わるか</h1>
       <p className="lead">
-        5-9 の「同じ位置・同じ型なら再利用」は、並べ替えで位置そのものが動くリストではそのまま使えない。
+        4-9 の「同じ位置・同じ型なら再利用」は、並べ替えで位置そのものが動くリストではそのまま使えない。
         位置の代わりに何を同一性の手がかりにするかを決めるのが key。
       </p>
 

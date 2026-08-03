@@ -2,7 +2,6 @@
  * Shiba CRM の通知（Reactの外にある小さなストア）。
  * 購読API（subscribe / getSnapshot）はちゃんと生えている。
  *
- * 02-feed/violations/notification-store.ts と同じ形。
  * 案件が動いたときに通知が積まれる、という想定で before / after 共通で使う。
  */
 

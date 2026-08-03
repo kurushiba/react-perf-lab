@@ -9,7 +9,7 @@ interface FavoriteButtonProps {
  * before はサーバーの応答を待ってから表示を変えていた（200〜600ms 固まる）。
  *
  * ここでは押した瞬間に「そうなるはずの状態」を先に見せ、
- * 裏で通信する。実際の通信時間は1msも短くなっていないが、体感は別物になる（9-5）。
+ * 裏で通信する。実際の通信時間は1msも短くなっていないが、体感は別物になる（8-5）。
  * 失敗したら useOptimistic の値は自動で捨てられ、本当の状態に戻る。
  */
 export default function FavoriteButton({ id }: FavoriteButtonProps) {

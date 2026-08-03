@@ -15,7 +15,7 @@ export interface SortState {
   desc: boolean
 }
 
-/** フィルタ条件は7つ。before ではこれが7つの独立した useState に散っている（5-8） */
+/** フィルタ条件は7つ。before ではこれが7つの独立した useState に散っている（4-8） */
 export interface Filters {
   keyword: string
   category: Category | 'all'
@@ -91,7 +91,7 @@ export function formatYen(value: number): string {
   return `${value.toLocaleString()} 円`
 }
 
-/** KPI 4枚の中身。before では useState + useEffect で同期しているが、本来は計算で導ける（5-7） */
+/** KPI 4枚の中身。before では useState + useEffect で同期しているが、本来は計算で導ける（4-7） */
 export function computeKpis(rows: SalesRow[], filters: Filters): Kpi[] {
   const totalRevenue = rows.reduce((sum, row) => sum + row.revenue, 0)
   const totalOrders = rows.reduce((sum, row) => sum + row.orders, 0)

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 /**
- * Sec.9 で Network パネルを見ながら読む数値を、画面にも残しておく。before / after で共有する。
+ * Sec.8 で Network パネルを見ながら読む数値を、画面にも残しておく。before / after で共有する。
  *
  * Network パネルは目で見るものなので、before と after の比較を残せない。
  * ここでは PerformanceResourceTiming から `/api/` へのリクエストだけを拾って、

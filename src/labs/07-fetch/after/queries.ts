@@ -31,7 +31,7 @@ export const productDetailQuery = (id: string) =>
     staleTime: FRESH_FOR,
   })
 
-/** 個別に取らず、まとめて1本にする（9-4） */
+/** 個別に取らず、まとめて1本にする（8-4） */
 export const productBatchQuery = (ids: string[]) =>
   queryOptions({
     queryKey: ['products', 'batch', ids.join(',')],

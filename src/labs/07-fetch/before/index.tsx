@@ -8,12 +8,12 @@ import ProductList from './ProductList'
 const TABS = [
   {
     id: 'browse',
-    label: '9-1〜9-3 一覧 → 詳細 → 関連',
+    label: '8-1〜8-3 一覧 → 詳細 → 関連',
     hint: '画面を開いた時点で一覧が走り、選ぶと詳細、詳細が返ってから関連。3段が直列に積み上がる',
   },
   {
     id: 'nplusone',
-    label: '9-4 行ごとの詳細取得',
+    label: '8-4 行ごとの詳細取得',
     hint: '24行が1本ずつ詳細を取りに行く。ブラウザの同時接続数で頭打ちになり、後ろの行ほど待たされる',
   },
 ] as const

@@ -2,7 +2,7 @@
  * 03-dashboard / after — before と同じ画面を、設計だけで作り直した版。
  *
  * メモ化（memo / useMemo / useCallback）は1つも足していない。
- * 変えたのは state の置き場所と、Context の分け方と、children の渡し方だけ（Sec.5）。
+ * 変えたのは state の置き場所と、Context の分け方と、children の渡し方だけ（Sec.4）。
  *
  * 1. state を下げる          … KpiCard.tsx
  * 2. children as props       … FilterPanel.tsx と、このファイルの渡し方
@@ -21,7 +21,7 @@ import TableRows from './TableRows'
 
 // ダッシュボード本体を組み立てるのは Provider の直下。
 // FilterPanel はこの JSX を children として受け取るだけなので、
-// パネル内の入力途中の state はここまで波及しない（5-3）
+// パネル内の入力途中の state はここまで波及しない（4-3）
 function DashboardBody() {
   return (
     <FilterPanel>

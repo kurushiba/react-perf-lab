@@ -1,7 +1,7 @@
 import { Profiler, useEffect, useState, type ProfilerOnRenderCallback, type ReactNode } from 'react'
 
 /**
- * Sec.5 の「光る範囲」を数値で出すための計測パネル。before / after / store で共有する。
+ * Sec.4 の「光る範囲」を数値で出すための計測パネル。before / after / store で共有する。
  *
  * DevTools の Highlight Updates は目で見るものなので、比較を残せない。
  * ここでは画面を5つの領域に分け、`<Region>` が `<Profiler>` で各領域を包んで

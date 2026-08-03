@@ -12,9 +12,9 @@ import { UI_ICONS, icon } from './icons'
 // 画像のダウンロードが残りのJSのダウンロードと並行になる。
 preload(PHOTOS_720[0], { as: 'image', fetchPriority: 'high' })
 
-// ルート単位の分割（8-4）。ユーザーは最初の1画面しか見ないので、
+// ルート単位の分割（7-4）。ユーザーは最初の1画面しか見ないので、
 // 分割の単位としてはここが最も効果が大きい。
-// loader を名前付きの関数にしておくと、hover で先読みするのに使い回せる（8-5）
+// loader を名前付きの関数にしておくと、hover で先読みするのに使い回せる（7-5）
 const loaders = {
   editor: () => import('./MarkdownEditor'),
   report: () => import('./ReportPage'),
@@ -27,7 +27,7 @@ const ReportPage = lazy(loaders.report)
 const AssetsPage = lazy(loaders.assets)
 const SettingsPage = lazy(loaders.settings)
 
-// モーダルは開くまで要らない。QRライブラリごと切り離す（8-5）
+// モーダルは開くまで要らない。QRライブラリごと切り離す（7-5）
 const loadQrModal = () => import('./QrModal')
 const QrModal = lazy(loadQrModal)
 

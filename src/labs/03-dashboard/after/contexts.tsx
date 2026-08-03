@@ -1,6 +1,6 @@
 /**
  * 03-dashboard / after — before の巨大な AppContext を、関心事ごとに3つへ分け、
- * さらにそれぞれを「値用」と「更新用」に分けたもの（5-5）。
+ * さらにそれぞれを「値用」と「更新用」に分けたもの（4-5）。
  *
  * 分ける基準は「一緒に変わるかどうか」。テーマとフィルタは別々に変わるので、
  * 同じ Context に入れると片方の変更でもう片方の購読者まで巻き込む。
@@ -80,10 +80,10 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
   const [theme, setTheme] = useState<Theme>('light')
   const [unreadCount, setUnreadCount] = useState(12)
 
-  // 7つの useState を1つの reducer に統合した（5-8）
+  // 7つの useState を1つの reducer に統合した（4-8）
   const [filters, dispatch] = useReducer(filtersReducer, DEFAULT_FILTERS)
 
-  // before は useState + useEffect で同期していた。導出できる値は計算で導く（5-7）。
+  // before は useState + useEffect で同期していた。導出できる値は計算で導く（4-7）。
   // 依存を書き忘れようがないので、フィルタと KPI がずれることも起きない
   const rows = applyFilters(salesRows, filters)
   const kpis = computeKpis(rows, filters)

@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
 
 /**
- * Sec.8 で読む数値を画面に出す。before / after で共有する。
+ * Sec.7 で読む数値を画面に出す。before / after で共有する。
  *
  * このリポジトリはラボごとにルート単位で遅延読み込みしているので、
  * 「アプリの初期バンドル」＝ 06-suite の重さ、にはならない。
- * そこで Sec.8 の「初期JSサイズ」は
+ * そこで Sec.7 の「初期JSサイズ」は
  *
  *     このラボの画面を表示するのに実際に転送されたJSの合計（gzip後）
  *     ＝ entry チャンク ＋ 06-suite のチャンク ＋ 共有チャンク
@@ -15,7 +15,7 @@ import { useCallback, useEffect, useState } from 'react'
  * 同一オリジンなので Timing-Allow-Origin なしで読める。
  *
  * ⚠️ dev サーバは各モジュールを未圧縮・未minifyのまま配るので、値が実際の数倍に出る。
- *    Sec.8 の数値は必ず `npm run build && npm run preview` の側で読む。
+ *    Sec.7 の数値は必ず `npm run build && npm run preview` の側で読む。
  */
 
 interface JsStats {
@@ -126,7 +126,7 @@ export default function BundlePanel({ hint }: BundlePanelProps) {
         }}
       >
         <code>{stats.largestName}</code> が最大。dev
-        サーバは未圧縮・未minifyのまま配るため値が大きく出る。Sec.8 の数値は{' '}
+        サーバは未圧縮・未minifyのまま配るため値が大きく出る。Sec.7 の数値は{' '}
         <code>npm run build</code> → <code>npm run preview</code> 側で読む。
       </p>
     </div>

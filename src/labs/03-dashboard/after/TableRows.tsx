@@ -65,10 +65,10 @@ export default function TableRows() {
         {/*
           before は key={index} だった。並べ替えで行の位置が入れ替わると、
           React は「同じ位置の同じ型」＝同じインスタンスとみなして再利用してしまい、
-          行が持っていた state（チェック）とDOMの状態（メモ欄）が別の商品に付く（5-10 / 5-11）。
+          行が持っていた state（チェック）とDOMの状態（メモ欄）が別の商品に付く（4-10 / 4-11）。
 
           key を安定した id にすると、React は行そのものを追跡して並べ替える。
-          Sec.6 で仮想化するときも、この id をそのまま getItemKey に渡す（6-3）。
+          Sec.5 で仮想化するときも、この id をそのまま getItemKey に渡す（5-3）。
         */}
         {rows.map((row) => (
           <TableRow key={row.id} row={row} />

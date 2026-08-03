@@ -6,7 +6,7 @@ import type { Filters, PeriodId, SortKey } from '../types'
  *
  * 分けて持っていると「期間を変えたら比較期間も合わせる」のような
  * 複数フィールドにまたがる不変条件を、更新のたびに手で書く必要がある。
- * 実際 before では `setPeriod` しか呼んでおらず、比較期間が取り残される（5-8）。
+ * 実際 before では `setPeriod` しか呼んでおらず、比較期間が取り残される（4-8）。
  *
  * 1つの reducer にまとめると、その不変条件は case の中に1度書けば済む。
  */

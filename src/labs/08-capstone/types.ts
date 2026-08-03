@@ -2,7 +2,7 @@
  * 08-capstone の型・定数・純粋関数。
  *
  * before と after で「変えないもの」だけをここに置く（見た目を持つコンポーネントは
- * 両方に複製する）。Sec.10 で受講者が直すのは構造であってこの計算ではない、
+ * 両方に複製する）。Sec.9 で受講者が直すのは構造であってこの計算ではない、
  * ということをファイルの置き場所でも示している。
  */
 import { INDUSTRIES, OWNERS, STAGES, type Deal, type Industry, type Owner, type Stage } from '../../data/deals'

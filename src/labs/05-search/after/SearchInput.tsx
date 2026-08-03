@@ -13,7 +13,7 @@ interface SearchInputProps {
 
 /**
  * 入力欄そのものは常に最優先で更新される。
- * 「結果をいつ作り直すか」を debounce（7-4）と useDeferredValue（7-6）で切り替えて比べられる。
+ * 「結果をいつ作り直すか」を debounce（6-4）と useDeferredValue（6-6）で切り替えて比べられる。
  */
 export default function SearchInput({
   value,

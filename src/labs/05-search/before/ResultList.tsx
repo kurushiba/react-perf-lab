@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { CATEGORY_LABELS, type Product } from '../../../data/products'
 import { reviewsOf } from '../reviews'
 
-/** 描画量は主題ではないので、上位100件だけを出す（大量DOMは Sec.6 の題材） */
+/** 描画量は主題ではないので、上位100件だけを出す（大量DOMは Sec.5 の題材） */
 const VISIBLE = 100
 
 type SortKey = 'score' | 'price' | 'stock'

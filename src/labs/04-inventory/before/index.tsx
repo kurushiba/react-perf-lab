@@ -7,19 +7,19 @@ import ListView from './ListView'
 const VIEWS = [
   {
     id: 'list',
-    label: '6-1〜6-3 一覧（10,000行）',
+    label: '5-1〜5-3 一覧（10,000行）',
     hint: '全件をDOMに置いている。スクロールしながら Performance パネルでFPSを見る',
     Component: ListView,
   },
   {
     id: 'description',
-    label: '6-4 可変高さ',
+    label: '5-4 可変高さ',
     hint: '説明文の折り返しで行の高さが揃わない。推定高さだけでは仮想化できない',
     Component: DescriptionListView,
   },
   {
     id: 'infinite',
-    label: '6-5 無限スクロール',
+    label: '5-5 無限スクロール',
     hint: '追加取得のたびに行が増える。スクロールしてからノード数を再計測する',
     Component: InfiniteFeed,
   },

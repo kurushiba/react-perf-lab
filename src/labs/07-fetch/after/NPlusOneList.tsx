@@ -4,10 +4,10 @@ import { productBatchQuery } from './queries'
 
 /**
  * before は24行が24本のリクエストを投げていた。
- * 欲しいのは同じ24件なので、まとめて1本で取る（9-4）。
+ * 欲しいのは同じ24件なので、まとめて1本で取る（8-4）。
  *
  * キャッシュが効いていても、投げている本数が多ければ速くならない。
- * 「取り直しを減らす」（9-3）と「そもそもの本数を減らす」（9-4）は別の仕事。
+ * 「取り直しを減らす」（8-3）と「そもそもの本数を減らす」（8-4）は別の仕事。
  */
 export default function NPlusOneList() {
   const { data } = useSuspenseQuery(productBatchQuery(NPLUSONE_IDS))

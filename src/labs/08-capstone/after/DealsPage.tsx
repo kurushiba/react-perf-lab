@@ -10,7 +10,7 @@ export default function DealsPage() {
   const openDealId = useOpenDealId()
   const setOpenDealId = useDrawerActions()
 
-  // 入力欄の更新は即座に、重い一覧の作り直しは後回しにする（10-6）
+  // 入力欄の更新は即座に、重い一覧の作り直しは後回しにする（9-6）
   const deferredQuery = useDeferredValue(filters.query)
 
   return (

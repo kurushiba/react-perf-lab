@@ -8,7 +8,7 @@ interface RelatedListProps {
 
 /**
  * before は関連4件を4本のリクエストで取っていた。
- * 取る中身は同じなので、1本にまとめれば往復が1回で済む（9-4）。
+ * 取る中身は同じなので、1本にまとめれば往復が1回で済む（8-4）。
  */
 export default function RelatedList({ ids }: RelatedListProps) {
   const { data } = useSuspenseQuery(productBatchQuery(ids))

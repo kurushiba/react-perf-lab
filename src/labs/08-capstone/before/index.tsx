@@ -32,7 +32,7 @@ export default function CapstoneBefore() {
         案件 5,000 件を扱う社内向けCRM。初期表示・スクロール・検索入力のどこかが詰まっている。
       </p>
 
-      <BundlePanel hint="この画面を出すために転送されたJSの合計（gzip後）。10-2 の「初期JSサイズ」。" />
+      <BundlePanel hint="この画面を出すために転送されたJSの合計（gzip後）。9-2 の「初期JSサイズ」。" />
       <VitalsPanel />
 
       <MetricsPanel hint="「リセットして計測」を押してから操作を1回だけ行い、commit 時間を読む">

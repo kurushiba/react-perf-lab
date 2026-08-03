@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 /**
- * 入力が止まってから delayMs 後の値を返す（7-4）。
+ * 入力が止まってから delayMs 後の値を返す（6-4）。
  *
  * ここでの setTimeout は「遅延の偽装」ではなく debounce の実装そのもの。
  *

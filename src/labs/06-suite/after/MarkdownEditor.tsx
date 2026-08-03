@@ -4,7 +4,7 @@ import { SAMPLE_MARKDOWN, buildSeries } from '../data'
 
 // 「統計を表示」を押すまで、チャートライブラリは1バイトも要らない。
 // ルートを分けただけでは消えない（このルートの中にあるので）ので、
-// コンポーネント単位でもう一段分割する（8-5）
+// コンポーネント単位でもう一段分割する（7-5）
 const loadChartPanel = () => import('./ChartPanel')
 const ChartPanel = lazy(loadChartPanel)
 

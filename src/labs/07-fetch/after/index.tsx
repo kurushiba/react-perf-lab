@@ -10,7 +10,7 @@ import Skeleton from './Skeleton'
 /**
  * QueryClient はこのラボの中だけで作る。
  * アプリ全体の entry に置くと、他のラボを開いただけで React Query が
- * 初期バンドルに乗ってしまい、Sec.8 の計測が汚れる。
+ * 初期バンドルに乗ってしまい、Sec.7 の計測が汚れる。
  */
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,12 +25,12 @@ const queryClient = new QueryClient({
 const TABS = [
   {
     id: 'browse',
-    label: '9-1〜9-3 一覧 → 詳細 → 関連',
+    label: '8-1〜8-3 一覧 → 詳細 → 関連',
     hint: '一覧はキャッシュ済み。詳細は hover の時点で取りに行っているので、クリック時にはもう届いている',
   },
   {
     id: 'nplusone',
-    label: '9-4 まとめて取得',
+    label: '8-4 まとめて取得',
     hint: '24行ぶんを1本にまとめた。本数も待ち時間も1リクエストぶんになる',
   },
 ] as const

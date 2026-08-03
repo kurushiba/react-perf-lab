@@ -23,7 +23,7 @@ function DetailBody({ id }: { id: string }) {
 
       {/*
         関連商品は詳細より一段深い。ここに境界をもう1つ置くと、
-        詳細が届いた時点で本文だけ先に出せる（境界の粒度＝9-6）
+        詳細が届いた時点で本文だけ先に出せる（境界の粒度＝8-6）
       */}
       <Suspense fallback={<div style={{ minHeight: 110 }} />}>
         <RelatedList ids={data.relatedIds} />

@@ -5,7 +5,7 @@ export default function SortBar() {
   const { sort } = useFilterValue()
   const { setSort } = useFilterActions()
 
-  // state を書き換えず、新しいオブジェクトを渡す（10-3）
+  // state を書き換えず、新しいオブジェクトを渡す（9-3）
   const changeSort = (key: SortKey) => setSort({ key })
 
   return (

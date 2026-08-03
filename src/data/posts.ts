@@ -13,7 +13,7 @@ export interface Post {
   authorHandle: string
   avatarUrl: string
   body: string
-  /** 4件に1件ほど、未最適化の大きなPNGが付く（`4-3` と Sec.8 の題材） */
+  /** 4件に1件ほど、未最適化の大きなPNGが付く（`2-6` の締めと Sec.7 の題材） */
   imageUrl: string | null
   likeCount: number
   commentCount: number

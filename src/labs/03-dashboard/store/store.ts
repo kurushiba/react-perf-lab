@@ -1,5 +1,5 @@
 /**
- * 5-6 の比較用。after で Context を6つに分けて実現したことを、
+ * 4-6 の比較用。after で Context を6つに分けて実現したことを、
  * 状態管理ライブラリなら「1つのストア＋セレクタ」で書けることを見せる。
  *
  * Context は「どの Context を購読するか」でしか粒度を選べない。
@@ -39,7 +39,7 @@ export const useDashboardStore = create<DashboardStore>()((set) => ({
 
   setCategory: (value) => set((state) => ({ filters: { ...state.filters, category: value } })),
   setMinRevenue: (value) => set((state) => ({ filters: { ...state.filters, minRevenue: value } })),
-  // 期間と比較期間をまとめて更新する。after の reducer と同じ役割（5-8）
+  // 期間と比較期間をまとめて更新する。after の reducer と同じ役割（4-8）
   setPeriod: (value) =>
     set((state) => ({ filters: { ...state.filters, period: value, comparePeriod: value } })),
 }))

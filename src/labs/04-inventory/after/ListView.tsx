@@ -32,7 +32,7 @@ export default function ListView() {
     estimateSize: () => ROW_HEIGHT,
     // 可視範囲の少し外まで描いておくと、速いスクロールでも白い帯が出にくい
     overscan: 8,
-    // key は 5-10 の通り安定した id を使う。仮想化でも同じ
+    // key は 4-10 の通り安定した id を使う。仮想化でも同じ
     getItemKey: (index) => products[index].id,
   })
 

@@ -16,7 +16,7 @@ interface FilterPanelProps {
  *
  * children として受け取る形にすると、その JSX を作るのは親（index.tsx）の仕事になる。
  * 親は draft を知らないので、打鍵しても children の要素は作り直されない ＝
- * メモ化を1つも書かずに、再描画の範囲がパネルの中だけに閉じる（5-3）。
+ * メモ化を1つも書かずに、再描画の範囲がパネルの中だけに閉じる（4-3）。
  */
 export default function FilterPanel({ children }: FilterPanelProps) {
   console.log('[render] FilterPanel')
@@ -81,7 +81,7 @@ export default function FilterPanel({ children }: FilterPanelProps) {
               ))}
             </select>
 
-            {/* 比較期間の追従は reducer が引き受けるので、呼び出し側は期間だけ渡せばよい（5-8） */}
+            {/* 比較期間の追従は reducer が引き受けるので、呼び出し側は期間だけ渡せばよい（4-8） */}
             <select
               value={filters.period}
               onChange={(e) =>

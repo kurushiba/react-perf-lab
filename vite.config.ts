@@ -14,7 +14,7 @@ import { mockApi } from './plugins/mock-api.ts'
 // import babel from '@rolldown/plugin-babel'
 // ===========================================================================
 
-// Sec.8-2「バンドルの中身を見る」でこのコメントを外す
+// Sec.7-2「バンドルの中身を見る」でこのコメントを外す
 // import { visualizer } from 'rollup-plugin-visualizer'
 
 export default defineConfig({
@@ -36,7 +36,7 @@ export default defineConfig({
     mockApi(),
 
     // =======================================================================
-    // ↓↓↓ Sec.8-2 で、この5行のコメントを外す ↓↓↓
+    // ↓↓↓ Sec.7-2 で、この5行のコメントを外す ↓↓↓
     //
     // visualizer({
     //   filename: 'dist/stats.html',

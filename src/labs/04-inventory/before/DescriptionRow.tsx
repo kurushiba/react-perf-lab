@@ -2,7 +2,7 @@ import { CATEGORY_LABELS, products, type Product } from '../../../data/products'
 
 /**
  * 説明文が折り返すので、行の高さが 40〜120px の範囲でばらつく。
- * 仮想化するときに「推定高さ」が使えない典型（6-4）。
+ * 仮想化するときに「推定高さ」が使えない典型（5-4）。
  */
 export function DescriptionRow({ product }: { product: Product }) {
   return (

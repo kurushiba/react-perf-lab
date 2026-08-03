@@ -33,7 +33,7 @@ export default function PostCard({ post, liked, onLike }: PostCardProps) {
 
       {/*
         画像は before のまま。Compiler は画像の大きさには関与しないので、
-        ここは Sec.8 まで遅いまま残る（`2-6` の締め・詳細は `4-3` / Sec.8）。
+        ここは Sec.7 まで遅いまま残る（`2-6` の締め・詳細は Sec.7）。
       */}
       {post.imageUrl && (
         <img src={post.imageUrl} alt="" style={{ width: '100%', borderRadius: 6, display: 'block' }} />

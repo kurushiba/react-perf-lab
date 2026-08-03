@@ -7,19 +7,19 @@ import ListView from './ListView'
 const VIEWS = [
   {
     id: 'list',
-    label: '6-3 仮想化した一覧',
+    label: '5-3 仮想化した一覧',
     hint: 'DOMに置いているのは可視分＋overscanだけ。before と同じ手順で測り直す',
     Component: ListView,
   },
   {
     id: 'description',
-    label: '6-4 可変高さ（measureElement）',
+    label: '5-4 可変高さ（measureElement）',
     hint: '推定値でいったん置き、描画後に実測して位置を直している',
     Component: DescriptionListView,
   },
   {
     id: 'infinite',
-    label: '6-5 無限スクロール ＋ 仮想化',
+    label: '5-5 無限スクロール ＋ 仮想化',
     hint: '取得件数と描画件数の両方を抑える。スクロール後もノード数が増えない',
     Component: InfiniteFeed,
   },

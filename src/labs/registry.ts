@@ -18,7 +18,7 @@ export interface LabDef {
 /**
  * 各ラボはルート単位で遅延読み込みする。
  * こうしておくと、ビルド出力のチャンクサイズがそのまま「そのラボの重さ」になり、
- * Sec.8 のバンドル計測が他のラボに汚染されない。
+ * Sec.6 のバンドル計測が他のラボに汚染されない。
  */
 export const labs: LabDef[] = [
   {
@@ -47,23 +47,23 @@ export const labs: LabDef[] = [
   {
     id: '03-dashboard',
     title: 'Shiba Analytics：分析ダッシュボード',
-    section: 'Sec.5',
+    section: 'Sec.4',
     summary: 'Context地獄と state の置き場所を、設計で解体する',
     variants: [
       { id: 'before', label: 'before', load: lazy(() => import('./03-dashboard/before/index')) },
       { id: 'after', label: 'after', load: lazy(() => import('./03-dashboard/after/index')) },
       {
         id: 'store',
-        label: 'Zustand版（5-6）',
+        label: 'Zustand版（4-6）',
         load: lazy(() => import('./03-dashboard/store/index')),
       },
-      { id: 'demos', label: 'key デモ（5-10）', load: lazy(() => import('./03-dashboard/demos/index')) },
+      { id: 'demos', label: 'key デモ（4-10）', load: lazy(() => import('./03-dashboard/demos/index')) },
     ],
   },
   {
     id: '04-inventory',
     title: '在庫管理テーブル',
-    section: 'Sec.6',
+    section: 'Sec.4',
     summary: '10,000行の一覧を仮想化する',
     variants: [
       { id: 'before', label: 'before', load: lazy(() => import('./04-inventory/before/index')) },
@@ -73,7 +73,7 @@ export const labs: LabDef[] = [
   {
     id: '05-search',
     title: '商品検索・フィルタ・集計',
-    section: 'Sec.7',
+    section: 'Sec.5',
     summary: '入力の引っかかりを、回数・優先度・別スレッドの3方向で解消する',
     variants: [
       { id: 'before', label: 'before', load: lazy(() => import('./05-search/before/index')) },
@@ -83,7 +83,7 @@ export const labs: LabDef[] = [
   {
     id: '06-suite',
     title: 'Shiba Suite：多機能アプリ',
-    section: 'Sec.8',
+    section: 'Sec.6',
     summary: '重い依存を積んだ初期バンドルを削る',
     variants: [
       { id: 'before', label: 'before', load: lazy(() => import('./06-suite/before/index')) },
@@ -93,7 +93,7 @@ export const labs: LabDef[] = [
   {
     id: '07-fetch',
     title: '一覧＋詳細のデータ取得',
-    section: 'Sec.9',
+    section: 'Sec.7',
     summary: 'ウォーターフォールとキャッシュなし取得を直す',
     variants: [
       { id: 'before', label: 'before', load: lazy(() => import('./07-fetch/before/index')) },
@@ -103,7 +103,7 @@ export const labs: LabDef[] = [
   {
     id: '08-capstone',
     title: 'Shiba CRM：総仕上げ',
-    section: 'Sec.0・Sec.10',
+    section: 'Sec.0・Sec.8',
     summary: '5種のボトルネックが同居したアプリを、自力で診断して直す',
     variants: [
       { id: 'before', label: 'before', load: lazy(() => import('./08-capstone/before/index')) },

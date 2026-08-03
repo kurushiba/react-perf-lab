@@ -30,7 +30,7 @@ export default function SuiteBefore() {
 
       <ProductImage src={PHOTOS[0]} alt="今月のおすすめ商品" />
 
-      <BundlePanel hint="このラボの画面を出すために転送されたJSの合計。これが Sec.8 でいう「初期JSサイズ」。" />
+      <BundlePanel hint="このラボの画面を出すために転送されたJSの合計。これが Sec.7 でいう「初期JSサイズ」。" />
       <VitalsPanel />
 
       <div className="toolbar" style={{ margin: '16px 0' }}>

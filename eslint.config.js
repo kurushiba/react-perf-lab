@@ -35,13 +35,5 @@ export default tseslint.config(
   //   plugins: { 'react-hooks': reactHooks },
   //   rules: reactHooks.configs['recommended-latest'].rules,
   // },
-  //
-  //   3-6 で 'use no memo' を選んだファイルは、lint でも対象外にする。
-  //   「Compilerの管轄から外す」という判断を、道具の設定にも一貫させるため。
-  //
-  // {
-  //   files: ['**/violations/solutions/06-ThirdParty.tsx'],
-  //   rules: { 'react-hooks/refs': 'off' },
-  // },
   // ===========================================================================
 )

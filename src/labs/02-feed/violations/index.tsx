@@ -1,38 +1,30 @@
 import { useState } from 'react'
-import ImpureRender from './01-ImpureRender'
-import MutateProps from './02-MutateProps'
-import MutateState from './03-MutateState'
-import ExternalStore from './04-ExternalStore'
-import RefInRender from './05-RefInRender'
-import ThirdParty from './06-ThirdParty'
-import ImpureRenderFixed from './solutions/01-ImpureRender'
-import MutatePropsFixed from './solutions/02-MutateProps'
-import MutateStateFixed from './solutions/03-MutateState'
-import ExternalStoreFixed from './solutions/04-ExternalStore'
-import RefInRenderFixed from './solutions/05-RefInRender'
-import ThirdPartyFixed from './solutions/06-ThirdParty'
+import ImpureRender from './before/01-ImpureRender'
+import MutateProps from './before/02-MutateProps'
+import GlobalVariable from './before/04-GlobalVariable'
+import RefInRender from './before/05-RefInRender'
 
 /**
- * Sec.3 の違反例6種。Compiler を有効にすると、左のタブのコンポーネントには
- * Memo ✨ が付かず、「修正後」に切り替えると付くようになる。
+ * Sec.3 の違反例4種。Compiler を有効にすると、各タブのコンポーネントには
+ * Memo ✨ が付かない。受講者が `before/` の各ファイルを直すと ✨ が付くようになる。
  *
- * 06 だけは事情が違い、修正後も Compiler の対象外（'use no memo'）にしている。
+ * 修正後のコードは `after/` にある（答え合わせ用。アプリからは読み込んでいない）。
+ * 04 だけは事情が違い、モジュール変数の書き換えがレンダーの外（イベントハンドラー）
+ * で起きるため、修正前も修正後も Compiler・ESLint のどちらからも検出されない。
+ * ✨ の有無ではなく、実際の挙動で直せたかどうかを確認する必要がある（3-6で扱う）。
  */
 const CASES = [
-  { id: '01', label: '01 純粋性', Violation: ImpureRender, Solution: ImpureRenderFixed },
-  { id: '02', label: '02 props の書き換え', Violation: MutateProps, Solution: MutatePropsFixed },
-  { id: '03', label: '03 state の書き換え', Violation: MutateState, Solution: MutateStateFixed },
-  { id: '04', label: '04 外部ストア', Violation: ExternalStore, Solution: ExternalStoreFixed },
-  { id: '05', label: '05 ref', Violation: RefInRender, Solution: RefInRenderFixed },
-  { id: '06', label: '06 外部ウィジェット', Violation: ThirdParty, Solution: ThirdPartyFixed },
+  { id: '01', label: '01 純粋性', Component: ImpureRender },
+  { id: '02', label: '02 props の書き換え', Component: MutateProps },
+  { id: '04', label: '04 グローバル変数', Component: GlobalVariable },
+  { id: '05', label: '05 ref', Component: RefInRender },
 ] as const
 
 export default function ViolationsLab() {
   const [current, setCurrent] = useState<string>(CASES[0].id)
-  const [showSolution, setShowSolution] = useState(false)
 
   const active = CASES.find((item) => item.id === current) ?? CASES[0]
-  const Active = showSolution ? active.Solution : active.Violation
+  const Active = active.Component
 
   return (
     <div>
@@ -52,18 +44,10 @@ export default function ViolationsLab() {
             {item.label}
           </button>
         ))}
-        <label style={{ marginLeft: 'auto' }}>
-          <input
-            type="checkbox"
-            checked={showSolution}
-            onChange={(e) => setShowSolution(e.target.checked)}
-          />{' '}
-          修正後（<code>solutions/</code>）を表示
-        </label>
       </div>
 
-      {/* key を変えて、違反版と修正版のあいだで state を持ち越さないようにする */}
-      <Active key={`${active.id}-${showSolution}`} />
+      {/* key を変えて、タブ切り替え時に前のタブの state を持ち越さないようにする */}
+      <Active key={active.id} />
     </div>
   )
 }
