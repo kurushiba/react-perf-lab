@@ -1,17 +1,15 @@
 import { useState } from 'react'
 import EffectDeps from './EffectDeps'
-import PointlessMemo from './PointlessMemo'
 
 /**
- * Sec.3 の `3-7`・`3-8`「手動メモ化をどう扱うか」の2例。
- * どちらも Rules of React には違反していない。それでも手動の判断が要る。
+ * Sec.3 の `3-7`「手動メモ化をどう扱うか」の例。
+ * Rules of React には違反していない。それでも手動の判断が要る。
  *
- * `HeavyCompute.tsx` / `heavy-data.ts` / `SlowStill.tsx` は残置しているが、
- * 旧 `4-3`・`4-4` の廃止により講座では使わないのでタブには出さない。
+ * `HeavyCompute.tsx` / `heavy-data.ts` / `SlowStill.tsx` / `PointlessMemo.tsx` は残置しているが、
+ * 旧 `4-3`・`4-4`・`3-8` の廃止により講座では使わないのでタブには出さない。
  */
 const DEMOS = [
   { id: 'effect-deps', label: '3-7 EffectDeps', Component: EffectDeps },
-  { id: 'pointless-memo', label: '3-8 PointlessMemo', Component: PointlessMemo },
 ] as const
 
 export default function EdgeLab() {
