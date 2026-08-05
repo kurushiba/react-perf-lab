@@ -31,7 +31,7 @@ export const labs: LabDef[] = [
   {
     id: '02-feed',
     title: 'Shibagram：SNSフィード',
-    section: 'Sec.2〜4',
+    section: 'Sec.2〜3',
     summary: '散らばった手動メモ化を React Compiler に置き換える',
     variants: [
       { id: 'before', label: 'before', load: lazy(() => import('./02-feed/before/index')) },
@@ -41,7 +41,6 @@ export const labs: LabDef[] = [
         label: 'violations（Sec.3）',
         load: lazy(() => import('./02-feed/violations/index')),
       },
-      { id: 'edge', label: 'edge（Sec.4）', load: lazy(() => import('./02-feed/edge/index')) },
     ],
   },
   {

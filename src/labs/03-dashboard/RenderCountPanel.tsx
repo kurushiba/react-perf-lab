@@ -5,7 +5,13 @@ import { Profiler, useEffect, useState, type ProfilerOnRenderCallback, type Reac
  *
  * DevTools の Highlight Updates は目で見るものなので、比較を残せない。
  * ここでは画面を5つの領域に分け、`<Region>` が `<Profiler>` で各領域を包んで
- * 「操作1回で、どの領域が何回コミットしたか」を数える。
+ * 「操作1回で、どの領域が何回レンダーされたか」を数える。
+ *
+ * 表示は回数・時間ともレンダー基準で揃えてある。`onRender` はコミット時に呼ばれるので
+ * 厳密には「コミットまで到達したレンダー」の回数と、その際のレンダーフェーズの所要時間
+ * （`actualDuration`）で、DOM 反映＝コミットフェーズのコストは含まない。
+ * このラボには useTransition / useDeferredValue / memo がないので、レンダーしたのに
+ * コミットされない領域は発生せず、「レンダーした領域」と読んで差し支えない。
  *
  * 04-inventory/MeasurePanel.tsx と同じで、記録するのはレンダー中ではなく
  * コミット後に呼ばれる `onRender` の中だけ。レンダー中に副作用を持たせると
@@ -83,7 +89,7 @@ export function RenderCountPanel({ hint }: RenderCountPanelProps) {
           <div className="metrics__value">
             {litRegions} / {REGIONS.length}
           </div>
-          <div className="metrics__label">コミットした領域</div>
+          <div className="metrics__label">レンダーした領域</div>
         </div>
         <div>
           <div className="metrics__value">{totalMs.toFixed(1)} ms</div>
@@ -116,7 +122,9 @@ export function RenderCountPanel({ hint }: RenderCountPanelProps) {
       </div>
 
       <p className="muted" style={{ margin: '8px 0 0' }}>
-        dev サーバは StrictMode で各コンポーネントが2回描画されるので、回数は2で割って読む。
+        時間はレンダーフェーズのみで、DOM への反映（コミットフェーズ）は含まない。dev サーバは
+        StrictMode でコンポーネント関数が2回呼ばれるが、コミットは1回なので回数はそのまま読める。
+        時間だけ2回分が乗るため、絶対値ではなく before / after の比で見る。
       </p>
     </div>
   )
