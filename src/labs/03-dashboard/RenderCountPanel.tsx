@@ -23,17 +23,17 @@ export const REGIONS = ['ヘッダー', 'KPI', 'チャート', 'フィルタ', '
 export type RegionName = (typeof REGIONS)[number]
 
 interface RegionStat {
-  commits: number
+  renders: number
   totalMs: number
 }
 
 // モジュールスコープの Map。再代入はせず、コミット後のコールバックからのみ書き換える
 const stats = new Map<string, RegionStat>()
 
-function readStats(): { name: RegionName; commits: number; totalMs: number }[] {
+function readStats(): { name: RegionName; renders: number; totalMs: number }[] {
   return REGIONS.map((name) => ({
     name,
-    commits: stats.get(name)?.commits ?? 0,
+    renders: stats.get(name)?.renders ?? 0,
     totalMs: stats.get(name)?.totalMs ?? 0,
   }))
 }
@@ -47,10 +47,10 @@ export function Region({ name, children }: RegionProps) {
   const handleRender: ProfilerOnRenderCallback = (_id, _phase, actualDuration) => {
     const current = stats.get(name)
     if (current) {
-      current.commits += 1
+      current.renders += 1
       current.totalMs += actualDuration
     } else {
-      stats.set(name, { commits: 1, totalMs: actualDuration })
+      stats.set(name, { renders: 1, totalMs: actualDuration })
     }
   }
 
@@ -79,7 +79,7 @@ export function RenderCountPanel({ hint }: RenderCountPanelProps) {
     setRows(readStats())
   }
 
-  const litRegions = rows.filter((row) => row.commits > 0).length
+  const litRegions = rows.filter((row) => row.renders > 0).length
   const totalMs = rows.reduce((sum, row) => sum + row.totalMs, 0)
 
   return (
@@ -111,11 +111,11 @@ export function RenderCountPanel({ hint }: RenderCountPanelProps) {
               className="bar"
               style={{
                 width: `${Math.min(row.totalMs * 4, 320)}px`,
-                background: row.commits === 0 ? 'var(--border)' : 'var(--accent)',
+                background: row.renders === 0 ? 'var(--border)' : 'var(--accent)',
               }}
             />
             <span className="muted" style={{ fontVariantNumeric: 'tabular-nums' }}>
-              {row.commits} 回 / {row.totalMs.toFixed(1)} ms
+              {row.renders} 回 / {row.totalMs.toFixed(1)} ms
             </span>
           </div>
         ))}

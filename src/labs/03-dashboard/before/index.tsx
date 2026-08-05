@@ -17,7 +17,7 @@ export default function DashboardBefore() {
         React Compiler は有効。それでもテーマを切り替えるだけ、KPIカードを1枚開くだけで画面全体が作り直される。
       </p>
 
-      <RenderCountPanel hint="「リセットして計測」を押してから操作を1回だけ行い、どの領域がコミットしたかを見る" />
+      <RenderCountPanel hint="「リセットして計測」を押してから操作を1回だけ行い、どの領域がレンダーされたかを見る" />
 
       <AppContext.Provider value={state}>
         <Region name="ヘッダー">
