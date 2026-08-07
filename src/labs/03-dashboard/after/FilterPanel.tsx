@@ -3,7 +3,7 @@ import { CATEGORIES, CATEGORY_LABELS } from '../../../data/products'
 import { OWNERS, salesRows } from '../data'
 import { Region } from '../RenderCountPanel'
 import { PERIODS } from '../types'
-import { useFilterActions, useFilterValue } from './contexts'
+import { useDashboardStore } from './store'
 
 interface FilterPanelProps {
   children: ReactNode
@@ -21,8 +21,13 @@ interface FilterPanelProps {
 export default function FilterPanel({ children }: FilterPanelProps) {
   console.log('[render] FilterPanel')
 
-  const { filters } = useFilterValue()
-  const dispatch = useFilterActions()
+  const filters = useDashboardStore((state) => state.filters)
+  const setKeyword = useDashboardStore((state) => state.setKeyword)
+  const setCategory = useDashboardStore((state) => state.setCategory)
+  const setOwner = useDashboardStore((state) => state.setOwner)
+  const setPeriod = useDashboardStore((state) => state.setPeriod)
+  const setComparePeriod = useDashboardStore((state) => state.setComparePeriod)
+  const setMinRevenue = useDashboardStore((state) => state.setMinRevenue)
 
   const [draft, setDraft] = useState(filters.keyword)
 
@@ -42,10 +47,10 @@ export default function FilterPanel({ children }: FilterPanelProps) {
               style={{ width: 200 }}
               onChange={(e) => setDraft(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === 'Enter') dispatch({ type: 'setKeyword', value: draft })
+                if (e.key === 'Enter') setKeyword(draft)
               }}
             />
-            <button className="button" onClick={() => dispatch({ type: 'setKeyword', value: draft })}>
+            <button className="button" onClick={() => setKeyword(draft)}>
               適用
             </button>
             <span className="muted">候補 {hitCount.toLocaleString()} 件</span>
@@ -54,12 +59,7 @@ export default function FilterPanel({ children }: FilterPanelProps) {
           <div className="toolbar">
             <select
               value={filters.category}
-              onChange={(e) =>
-                dispatch({
-                  type: 'setCategory',
-                  value: e.target.value as (typeof CATEGORIES)[number] | 'all',
-                })
-              }
+              onChange={(e) => setCategory(e.target.value as (typeof CATEGORIES)[number] | 'all')}
             >
               <option value="all">カテゴリ：すべて</option>
               {CATEGORIES.map((category) => (
@@ -71,7 +71,7 @@ export default function FilterPanel({ children }: FilterPanelProps) {
 
             <select
               value={filters.owner}
-              onChange={(e) => dispatch({ type: 'setOwner', value: e.target.value })}
+              onChange={(e) => setOwner(e.target.value)}
             >
               <option value="all">担当：すべて</option>
               {OWNERS.map((owner) => (
@@ -81,12 +81,9 @@ export default function FilterPanel({ children }: FilterPanelProps) {
               ))}
             </select>
 
-            {/* 比較期間の追従は reducer が引き受けるので、呼び出し側は期間だけ渡せばよい（4-8） */}
             <select
               value={filters.period}
-              onChange={(e) =>
-                dispatch({ type: 'setPeriod', value: e.target.value as (typeof PERIODS)[number]['id'] })
-              }
+              onChange={(e) => setPeriod(e.target.value as (typeof PERIODS)[number]['id'])}
             >
               {PERIODS.map((period) => (
                 <option key={period.id} value={period.id}>
@@ -97,12 +94,7 @@ export default function FilterPanel({ children }: FilterPanelProps) {
 
             <select
               value={filters.comparePeriod}
-              onChange={(e) =>
-                dispatch({
-                  type: 'setComparePeriod',
-                  value: e.target.value as (typeof PERIODS)[number]['id'],
-                })
-              }
+              onChange={(e) => setComparePeriod(e.target.value as (typeof PERIODS)[number]['id'])}
             >
               {PERIODS.map((period) => (
                 <option key={period.id} value={period.id}>
@@ -118,7 +110,7 @@ export default function FilterPanel({ children }: FilterPanelProps) {
                 step={1_000_000}
                 value={filters.minRevenue}
                 style={{ width: 120 }}
-                onChange={(e) => dispatch({ type: 'setMinRevenue', value: Number(e.target.value) })}
+                onChange={(e) => setMinRevenue(Number(e.target.value))}
               />
             </label>
           </div>

@@ -1,11 +1,11 @@
-import { useNotificationActions, useUnreadCount, useUser, useUserActions } from './contexts'
+import { useDashboardStore } from './store'
 
 // 通知バッジだけを分けておくと、通知の増減で再描画されるのはこの小さな span だけになる。
 // ヘッダー全体（ユーザー名・テーマ切替ボタン）は巻き込まれない
 function NotificationBadge() {
   console.log('[render] NotificationBadge')
 
-  const unreadCount = useUnreadCount()
+  const unreadCount = useDashboardStore((state) => state.unreadCount)
 
   return (
     <span
@@ -20,11 +20,14 @@ function NotificationBadge() {
 export default function Header() {
   console.log('[render] Header')
 
-  // 購読するのは「ユーザーとテーマ」だけ。フィルタが変わってもここは動かない
-  const { user, theme } = useUser()
-  const { setTheme } = useUserActions()
-  // 更新関数だけの Context は参照が変わらないので、通知が増えてもここは再描画されない
-  const { addNotification, markAllRead } = useNotificationActions()
+  // 選ぶのは「ユーザーとテーマ」だけ。フィルタが変わってもここは動かない
+  const user = useDashboardStore((state) => state.user)
+  const theme = useDashboardStore((state) => state.theme)
+  // 更新関数はストアの中で定義が変わらないので、選んでも参照は常に同じ。
+  // unreadCount を選んでいないので、通知が増えてもここは再描画されない
+  const setTheme = useDashboardStore((state) => state.setTheme)
+  const addNotification = useDashboardStore((state) => state.addNotification)
+  const markAllRead = useDashboardStore((state) => state.markAllRead)
 
   return (
     <div className="panel" style={{ marginBottom: 16 }}>

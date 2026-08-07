@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { CATEGORY_LABELS } from '../../../data/products'
-import type { SalesRow } from '../data'
-import { formatYen, SORT_COLUMNS } from '../types'
-import { useFilterActions, useFilterValue } from './contexts'
+import { salesRows, type SalesRow } from '../data'
+import { applyFilters, formatYen, SORT_COLUMNS } from '../types'
+import { useDashboardStore } from './store'
 
 interface TableRowProps {
   row: SalesRow
@@ -35,8 +35,12 @@ function TableRow({ row }: TableRowProps) {
 export default function TableRows() {
   console.log('[render] TableRows')
 
-  const { rows, filters } = useFilterValue()
-  const dispatch = useFilterActions()
+  const filters = useDashboardStore((state) => state.filters)
+  const toggleSort = useDashboardStore((state) => state.toggleSort)
+
+  // 絞り込んだ行は filters から導ける。セレクタで作って返すと毎回新しい配列になるので、
+  // 選ぶのは filters だけにして、絞り込みはセレクタの外でやる
+  const rows = applyFilters(salesRows, filters)
 
   return (
     <div>
@@ -51,7 +55,7 @@ export default function TableRows() {
                   ? { borderColor: 'var(--accent)', color: 'var(--accent)' }
                   : undefined
               }
-              onClick={() => dispatch({ type: 'toggleSort', key: column.key })}
+              onClick={() => toggleSort(column.key)}
             >
               {column.label}
               {column.key === filters.sort.key ? (filters.sort.desc ? ' ▼' : ' ▲') : ''}
@@ -63,11 +67,10 @@ export default function TableRows() {
 
       <div className="list-scroll">
         {/*
-          before は key={index} だった。並べ替えで行の位置が入れ替わると、
-          React は「同じ位置の同じ型」＝同じインスタンスとみなして再利用してしまい、
-          行が持っていた state（チェック）とDOMの状態（メモ欄）が別の商品に付く（4-10 / 4-11）。
+          key には安定した id を使う。index を使うと、並べ替えで行の位置が入れ替わったときに
+          React が「同じ位置の同じ型」＝同じインスタンスとみなして再利用してしまい、
+          行が持っていた state（チェック）とDOMの状態（メモ欄）が別の商品に付いてしまう（4-8 と同じ仕組み）。
 
-          key を安定した id にすると、React は行そのものを追跡して並べ替える。
           Sec.5 で仮想化するときも、この id をそのまま getItemKey に渡す（5-3）。
         */}
         {rows.map((row) => (

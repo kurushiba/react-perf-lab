@@ -1,5 +1,5 @@
 /**
- * before / after / store の3バリアントが共有する「変更しない型と計算」。
+ * before / after の2バリアントが共有する「変更しない型と計算」。
  * 見た目のあるコンポーネントは共有せず、各バリアントに複製する。
  */
 
@@ -15,7 +15,7 @@ export interface SortState {
   desc: boolean
 }
 
-/** フィルタ条件は7つ。before ではこれが7つの独立した useState に散っている（4-8） */
+/** フィルタ条件は7つ。before ではこれが7つの独立した useState に散っている */
 export interface Filters {
   keyword: string
   category: Category | 'all'
@@ -91,7 +91,7 @@ export function formatYen(value: number): string {
   return `${value.toLocaleString()} 円`
 }
 
-/** KPI 4枚の中身。before では useState + useEffect で同期しているが、本来は計算で導ける（4-7） */
+/** KPI 4枚の中身。filters適用後のrowsから計算する */
 export function computeKpis(rows: SalesRow[], filters: Filters): Kpi[] {
   const totalRevenue = rows.reduce((sum, row) => sum + row.revenue, 0)
   const totalOrders = rows.reduce((sum, row) => sum + row.orders, 0)

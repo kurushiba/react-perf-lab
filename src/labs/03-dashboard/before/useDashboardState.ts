@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { Category } from '../../../data/products'
 import { salesRows } from '../data'
 import {
@@ -6,7 +6,6 @@ import {
   computeKpis,
   DEFAULT_FILTERS,
   type Filters,
-  type Kpi,
   type PeriodId,
   type SortKey,
   type SortState,
@@ -31,14 +30,7 @@ export function useDashboardState() {
 
   const filters: Filters = { keyword, category, owner, period, comparePeriod, minRevenue, sort }
   const rows = applyFilters(salesRows, filters)
-
-  const [kpis, setKpis] = useState<Kpi[]>(() =>
-    computeKpis(applyFilters(salesRows, DEFAULT_FILTERS), DEFAULT_FILTERS),
-  )
-
-  useEffect(() => {
-    setKpis(computeKpis(applyFilters(salesRows, filters), filters))
-  }, [keyword, period, comparePeriod, minRevenue])
+  const kpis = computeKpis(rows, filters)
 
   const toggleSort = (key: SortKey) => {
     setSort((prev) => (prev.key === key ? { key, desc: !prev.desc } : { key, desc: true }))

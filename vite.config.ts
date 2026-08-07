@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import { mockApi } from './plugins/mock-api.ts'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { mockApi } from './plugins/mock-api.ts';
 
 // ===========================================================================
 // ↓↓↓ Sec.2-4「Compilerを導入する」で、この2行のコメントを外す ↓↓↓
@@ -10,8 +10,8 @@ import { mockApi } from './plugins/mock-api.ts'
 //     npm i -D @rolldown/plugin-babel @babel/core babel-plugin-react-compiler
 //   （この教材リポジトリでは devDependencies に入れてあるのでインストールは不要）
 //
-// import { reactCompilerPreset } from '@vitejs/plugin-react'
-// import babel from '@rolldown/plugin-babel'
+import { reactCompilerPreset } from '@vitejs/plugin-react';
+import babel from '@rolldown/plugin-babel';
 // ===========================================================================
 
 // Sec.7-2「バンドルの中身を見る」でこのコメントを外す
@@ -30,7 +30,7 @@ export default defineConfig({
     //     babel({ presets: [reactCompilerPreset()] })
     //       → 全体が対象（infer）
     //
-    // babel({ presets: [reactCompilerPreset()] }),
+    babel({ presets: [reactCompilerPreset()] }),
     // =======================================================================
 
     mockApi(),
@@ -45,4 +45,4 @@ export default defineConfig({
     // }),
     // =======================================================================
   ],
-})
+});

@@ -62,8 +62,8 @@ export default function TableRows() {
       </div>
 
       <div className="list-scroll">
-        {rows.map((row, index) => (
-          <TableRow key={index} row={row} selected={selected} onToggle={toggleSelected} />
+        {rows.map((row) => (
+          <TableRow key={row.id} row={row} selected={selected} onToggle={toggleSelected} />
         ))}
       </div>
     </div>

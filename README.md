@@ -118,7 +118,7 @@ React DevTools の Components タブでコンポーネント名の横に **Memo 
 |---|---|---|
 | `src/labs/01-warmup/` | Sec.1 | レンダリングの3フェーズ、再描画の連鎖、memo / useMemo / useCallback |
 | `src/labs/02-feed/` | Sec.2〜3 | 散らばった手動メモ化を React Compiler に置き換える |
-| `src/labs/03-dashboard/` | Sec.4 | コンポーネント設計と状態配置（Context分割・state を下げる） |
+| `src/labs/03-dashboard/` | Sec.4 | コンポーネント設計と状態配置（state を下げる・バケツリレー→Context・Context分割） |
 | `src/labs/04-inventory/` | Sec.5 | 10,000行の一覧を仮想化する |
 | `src/labs/05-search/` | Sec.6 | 重い計算とメインスレッド、並行機能 |
 | `src/labs/06-suite/` | Sec.7 | バンドルサイズと読み込み最適化 |

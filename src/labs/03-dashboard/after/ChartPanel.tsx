@@ -1,15 +1,17 @@
 import { CATEGORIES, CATEGORY_LABELS } from '../../../data/products'
-import { dailySeries } from '../data'
-import { formatYen } from '../types'
-import { useFilterValue, useUser } from './contexts'
+import { dailySeries, salesRows } from '../data'
+import { applyFilters, formatYen } from '../types'
+import { useDashboardStore } from './store'
 
 export default function ChartPanel() {
   console.log('[render] ChartPanel')
 
-  // フィルタとテーマの両方を使うので、この2つの Context を購読する。
+  // フィルタとテーマの両方を使うので、この2つを選ぶ。
   // 通知が増えてもここは動かない（before は同じ Context だったので動いていた）
-  const { rows } = useFilterValue()
-  const { theme } = useUser()
+  const filters = useDashboardStore((state) => state.filters)
+  const theme = useDashboardStore((state) => state.theme)
+
+  const rows = applyFilters(salesRows, filters)
 
   const byCategory = CATEGORIES.map((category) => ({
     category,
