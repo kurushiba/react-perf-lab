@@ -1,24 +1,23 @@
-import { useState, type ReactNode } from 'react'
+import { useState } from 'react'
 import { CATEGORIES, CATEGORY_LABELS } from '../../../data/products'
 import { OWNERS, salesRows } from '../data'
 import { Region } from '../RenderCountPanel'
 import { PERIODS } from '../types'
+import ChartPanel from './ChartPanel'
+import KpiRow from './KpiRow'
 import { useDashboardStore } from './store'
-
-interface FilterPanelProps {
-  children: ReactNode
-}
+import TableRows from './TableRows'
 
 /**
- * before はこのファイルの中で KpiRow / ChartPanel / TableRows を直接 import して
- * 描画していた。パネル自身が持つ入力途中の state（draft）が変わるたびに、
- * この JSX がまるごと作り直される構造になっていた。
+ * 選ぶのは filters と、使う更新関数だけ。theme や unreadCount が変わっても
+ * このパネルは動かない（4-7）。
  *
- * children として受け取る形にすると、その JSX を作るのは親（index.tsx）の仕事になる。
- * 親は draft を知らないので、打鍵しても children の要素は作り直されない ＝
- * メモ化を1つも書かずに、再描画の範囲がパネルの中だけに閉じる（4-3）。
+ * 入力途中の値（draft）はこのコンポーネントの中に閉じている。打鍵のたびに
+ * FilterPanel 自身は再描画されるが、下の KpiRow / ChartPanel / TableRows は
+ * props を1つも受け取っていないので Compiler が要素の生成ごとキャッシュし、
+ * 再描画されない。
  */
-export default function FilterPanel({ children }: FilterPanelProps) {
+export default function FilterPanel() {
   console.log('[render] FilterPanel')
 
   const filters = useDashboardStore((state) => state.filters)
@@ -117,7 +116,17 @@ export default function FilterPanel({ children }: FilterPanelProps) {
         </div>
       </Region>
 
-      {children}
+      <Region name="KPI">
+        <KpiRow />
+      </Region>
+
+      <Region name="チャート">
+        <ChartPanel />
+      </Region>
+
+      <Region name="テーブル">
+        <TableRows />
+      </Region>
     </div>
   )
 }
