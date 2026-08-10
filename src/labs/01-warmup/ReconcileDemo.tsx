@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 /**
- * 1-3 Virtual DOM と reconciliation
+ * 4-8 コンポーネントの同一性と state の保持
  *
  * 「同じ位置・同じ型」なら state ごと再利用される。型が変わると破棄して作り直される。
  * 入力途中の値が残るか消えるかで、その違いが見える。
@@ -49,7 +49,7 @@ export default function ReconcileDemo() {
 
   return (
     <div className="page">
-      <h1>1-3 同じ位置・同じ型なら再利用される</h1>
+      <h1>4-8 同じ位置・同じ型なら再利用される</h1>
       <p className="muted">
         入力欄に何か打ってから、下の2つのボタンを押し比べる。
         props だけが変わる場合は値が残り、型が変わる場合は state ごと破棄されて消える。

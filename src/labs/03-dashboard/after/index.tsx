@@ -14,10 +14,10 @@ import FilterPanel from './FilterPanel'
 import Header from './Header'
 import { useDashboardStore } from './store'
 
-// ストアはモジュールに置いてあるので、アプリを Provider で囲む必要がない（4-7）。
-// Provider の境界が無い＝どのコンポーネントからでもストアを読めるので、
-// 4-6 で theme を読むために挟んでいた ThemedPage も要らなくなった
-export default function DashboardAfter() {
+// 4-6 では、Provider の外側にいる index.tsx から theme を読めないので ThemedPage を挟んでいた。
+// ストアはモジュールに置いてあるので Provider の境界が無く、この迂回はもう必須ではない（4-7）。
+// それでも残してあるのは、theme の購読をこの小さなコンポーネントに閉じ込めておけるから
+function ThemedPage({ children }: { children: React.ReactNode }) {
   const theme = useDashboardStore((state) => state.theme)
 
   return (
@@ -25,6 +25,14 @@ export default function DashboardAfter() {
       className="page"
       style={{ maxWidth: 1120, background: theme === 'contrast' ? '#e9ebef' : undefined }}
     >
+      {children}
+    </div>
+  )
+}
+
+export default function DashboardAfter() {
+  return (
+    <ThemedPage>
       <h1>Shiba Analytics（after）</h1>
       <p className="lead">
         メモ化は1つも足していない。state の置き場所と、購読範囲の絞り方だけで、再描画の範囲を必要な場所に絞った。
@@ -37,6 +45,6 @@ export default function DashboardAfter() {
       </Region>
 
       <FilterPanel />
-    </div>
+    </ThemedPage>
   )
 }

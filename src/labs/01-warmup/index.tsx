@@ -18,7 +18,7 @@ import UseCallbackDemo from './UseCallbackDemo'
 const DEMOS = [
   { id: 'three-phases', label: '1-1 3フェーズ', Component: ThreePhases },
   { id: 'chain', label: '1-4 再描画の連鎖', Component: ParentChildChain },
-  { id: 'reconcile', label: '1-3 reconciliation', Component: ReconcileDemo },
+  { id: 'reconcile', label: '4-8 同一性', Component: ReconcileDemo },
   { id: 'memo', label: '1-6 memo', Component: MemoDemo },
   { id: 'use-memo', label: '1-6 useMemo', Component: UseMemoDemo },
   { id: 'use-callback', label: '1-6 useCallback', Component: UseCallbackDemo },
