@@ -7,10 +7,9 @@ import CategoryChart from './CategoryChart'
 import FilterPanel from './FilterPanel'
 import SearchInput, { type InputMode } from './SearchInput'
 import TabPanel from './TabPanel'
-import { searchProducts } from './search-index'
+import { searchProducts } from './searchProducts'
 import { useAggregate } from './useAggregate'
 import { useAnalytics } from './useAnalytics'
-import { useDebouncedValue } from './useDebouncedValue'
 
 export default function SearchAfter() {
   const [query, setQuery] = useState('')
@@ -19,16 +18,18 @@ export default function SearchAfter() {
   const [tab, setTab] = useState<TabId>('results')
   const [history, setHistory] = useState<string[]>([])
 
-  // ①回数を減らす（6-4）と ②後回しにする（6-6）を切り替えて比べる
-  const debouncedQuery = useDebouncedValue(query, 250)
+  // ①回数を減らす（6-4）と ②後回しにする（6-6）を切り替えて比べる。
+  // debounce は SearchInput 側で「親に通知するタイミング」を遅らせているので、
+  // ここに来る query 自体がもう間引かれている（＝親の再レンダリングごと減っている）。
   const deferredQuery = useDeferredValue(query)
-  const searchQuery = mode === 'debounce' ? debouncedQuery : deferredQuery
+  const searchQuery = mode === 'debounce' ? query : deferredQuery
 
-  // 索引を引くだけなので、1打鍵あたり 1ms 前後で終わる
+  // 中身は before と同じ全件走査。Compiler がこの行をメモ化しているので、
+  // searchQuery が変わらない限り再計算されず、参照も同じままになる
   const results = searchProducts(searchQuery, filters)
 
   // ③別スレッドへ逃がす（6-7）。重い集計はメインスレッドを一切止めない
-  const summary = useAggregate(searchQuery, filters)
+  const summary = useAggregate(results)
 
   const sentCount = useAnalytics(query, filters, results.length, tab)
 
@@ -43,8 +44,7 @@ export default function SearchAfter() {
       <VitalsPanel />
 
       <SearchInput
-        value={query}
-        onChange={setQuery}
+        onSearch={setQuery}
         onSubmit={(value) => value && setHistory((prev) => [value, ...prev].slice(0, 10))}
         resultCount={results.length}
         mode={mode}

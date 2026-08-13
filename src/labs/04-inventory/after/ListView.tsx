@@ -1,13 +1,19 @@
 import { useVirtualizer } from '@tanstack/react-virtual'
-import { useRef } from 'react'
+import { useRef, type CSSProperties } from 'react'
 import { CATEGORY_LABELS, products, type Product } from '../../../data/products'
 
 /** styles.css の `.row` と同じ値。ここがずれるとスクロールバーの長さが狂う */
 const ROW_HEIGHT = 44
 
-function ProductRow({ product }: { product: Product }) {
+interface ProductRowProps {
+  product: Product
+  /** 空の箱の中での位置決め。呼び出し側が計算して渡す */
+  style: CSSProperties
+}
+
+function ProductRow({ product, style }: ProductRowProps) {
   return (
-    <>
+    <div className="row" style={style}>
       <img src={product.thumbnailUrl} alt="" width={32} height={32} />
       <span className="row__main">
         <span className="row__name">{product.name}</span>
@@ -19,7 +25,7 @@ function ProductRow({ product }: { product: Product }) {
         在庫 {product.stock}
       </span>
       <button className="button">編集</button>
-    </>
+    </div>
   )
 }
 
@@ -48,9 +54,9 @@ export default function ListView() {
         {/* 全件ぶんの高さを持つ空の箱。これでスクロールバーの長さを再現する */}
         <div style={{ height: virtualizer.getTotalSize(), position: 'relative' }}>
           {virtualRows.map((virtualRow) => (
-            <div
+            <ProductRow
               key={virtualRow.key}
-              className="row"
+              product={products[virtualRow.index]}
               style={{
                 position: 'absolute',
                 top: 0,
@@ -58,9 +64,7 @@ export default function ListView() {
                 width: '100%',
                 transform: `translateY(${virtualRow.start}px)`,
               }}
-            >
-              <ProductRow product={products[virtualRow.index]} />
-            </div>
+            />
           ))}
         </div>
       </div>

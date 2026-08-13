@@ -34,8 +34,7 @@ export default function SearchBefore() {
       <VitalsPanel />
 
       <SearchInput
-        value={query}
-        onChange={setQuery}
+        onSearch={setQuery}
         onSubmit={(value) => value && setHistory((prev) => [value, ...prev].slice(0, 10))}
         resultCount={results.length}
       />

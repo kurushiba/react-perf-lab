@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import MeasurePanel from '../MeasurePanel'
 import DescriptionListView from './DescriptionRow'
-import InfiniteFeed from './InfiniteFeed'
 import ListView from './ListView'
 
 const VIEWS = [
@@ -16,12 +15,6 @@ const VIEWS = [
     label: '5-4 可変高さ（measureElement）',
     hint: '推定値でいったん置き、描画後に実測して位置を直している',
     Component: DescriptionListView,
-  },
-  {
-    id: 'infinite',
-    label: '5-5 無限スクロール ＋ 仮想化',
-    hint: '取得件数と描画件数の両方を抑える。スクロール後もノード数が増えない',
-    Component: InfiniteFeed,
   },
 ] as const
 

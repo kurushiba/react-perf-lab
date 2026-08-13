@@ -14,9 +14,14 @@ interface DescriptionRowProps {
 /**
  * 高さを固定していない行。実際の高さは描画後にブラウザから測る（measureElement）。
  */
-export function DescriptionRow({ product, style, ref, ...rest }: DescriptionRowProps) {
+export function DescriptionRow({
+  product,
+  style,
+  ref,
+  'data-index': dataIndex,
+}: DescriptionRowProps) {
   return (
-    <div className="row row--auto" style={style} ref={ref} {...rest}>
+    <div className="row row--auto" style={style} ref={ref} data-index={dataIndex}>
       <img src={product.thumbnailUrl} alt="" width={32} height={32} />
       <span className="row__main">
         <span className="row__name">{product.name}</span>
