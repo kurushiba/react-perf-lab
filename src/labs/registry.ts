@@ -89,7 +89,7 @@ export const labs: LabDef[] = [
   {
     id: '04-inventory',
     title: '在庫管理テーブル',
-    section: 'Sec.4',
+    section: 'Sec.5',
     summary: '10,000行の一覧を仮想化する',
     variants: [
       {
@@ -107,7 +107,7 @@ export const labs: LabDef[] = [
   {
     id: '05-search',
     title: '商品検索・フィルタ・集計',
-    section: 'Sec.5',
+    section: 'Sec.6',
     summary: '入力の引っかかりを、回数・優先度・別スレッドの3方向で解消する',
     variants: [
       {
@@ -125,7 +125,7 @@ export const labs: LabDef[] = [
   {
     id: '06-suite',
     title: 'Shiba Suite：多機能アプリ',
-    section: 'Sec.6',
+    section: 'Sec.7',
     summary: '重い依存を積んだ初期バンドルを削る',
     variants: [
       {
@@ -143,7 +143,7 @@ export const labs: LabDef[] = [
   {
     id: '07-fetch',
     title: '一覧＋詳細のデータ取得',
-    section: 'Sec.7',
+    section: 'Sec.8',
     summary: 'ウォーターフォールとキャッシュなし取得を直す',
     variants: [
       {
@@ -161,7 +161,7 @@ export const labs: LabDef[] = [
   {
     id: '08-capstone',
     title: 'Shiba CRM：総仕上げ',
-    section: 'Sec.0・Sec.8',
+    section: 'Sec.0・Sec.9',
     summary: '5種のボトルネックが同居したアプリを、自力で診断して直す',
     variants: [
       {
