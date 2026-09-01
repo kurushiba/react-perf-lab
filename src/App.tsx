@@ -1,14 +1,19 @@
-import { Suspense } from 'react'
-import { BrowserRouter, Link, Route, Routes, useParams } from 'react-router-dom'
-import { findLab, labs } from './labs/registry'
+import { Suspense } from 'react';
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useParams,
+} from 'react-router-dom';
+import { findLab, labs } from './labs/registry';
 
 function LabIndex() {
   return (
     <div className="page">
       <h1>react-perf-lab</h1>
       <p className="lead">
-        Udemy講座「Reactパフォーマンスチューニング」の教材です。 計測は
-        <strong> CPU 4x スロットリング</strong> を前提にしています（README参照）。
+        Udemy講座「Reactパフォーマンスチューニング」の教材です。
       </p>
 
       <ul className="lab-list">
@@ -25,7 +30,11 @@ function LabIndex() {
             <div className="lab-card__variants">
               {lab.variants.map((variant) =>
                 variant.load ? (
-                  <Link key={variant.id} className="button" to={`/labs/${lab.id}/${variant.id}`}>
+                  <Link
+                    key={variant.id}
+                    className="button"
+                    to={`/labs/${lab.id}/${variant.id}`}
+                  >
                     {variant.label}
                   </Link>
                 ) : (
@@ -39,13 +48,13 @@ function LabIndex() {
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
 function LabHost() {
-  const { labId, variantId } = useParams()
-  const lab = findLab(labId)
-  const variant = lab?.variants.find((v) => v.id === variantId)
+  const { labId, variantId } = useParams();
+  const lab = findLab(labId);
+  const variant = lab?.variants.find((v) => v.id === variantId);
 
   if (!lab || !variant) {
     return (
@@ -53,7 +62,7 @@ function LabHost() {
         <h1>ラボが見つかりません</h1>
         <Link to="/">一覧へ戻る</Link>
       </div>
-    )
+    );
   }
 
   if (!variant.load) {
@@ -63,10 +72,10 @@ function LabHost() {
         <p>このバリアント（{variant.label}）はまだ実装されていません。</p>
         <Link to="/">一覧へ戻る</Link>
       </div>
-    )
+    );
   }
 
-  const Component = variant.load
+  const Component = variant.load;
 
   return (
     <div className="lab-host">
@@ -96,7 +105,7 @@ function LabHost() {
         <Component />
       </Suspense>
     </div>
-  )
+  );
 }
 
 export default function App() {
@@ -116,5 +125,5 @@ export default function App() {
         />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
