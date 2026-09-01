@@ -14,9 +14,9 @@ export interface AggregateState {
  *
  * 受け取るのは検索結果の配列そのもの。配列を依存配列に置けるのは、
  * React Compiler が呼び出し側の searchProducts(...) をメモ化していて、
- * 検索語とフィルタが変わらない限り同じ参照が返ってくるから（6-6）。
+ * 検索語とフィルタが変わらない限り同じ参照が返ってくるから（2-3 の reactive scope）。
  *
- * メインスレッドがやるのは「番号の配列を作って渡す」だけなので、
+ * メインスレッドがやるのは「id の配列を作って渡す」だけなので、
  * 何件ヒットしていても打鍵の応答は止まらない。
  */
 export function useAggregate(items: Product[]): AggregateState {
@@ -30,7 +30,7 @@ export function useAggregate(items: Product[]): AggregateState {
 
     worker.addEventListener('message', (event: MessageEvent<AggregateResponse>) => {
       // 追い越された古い結果は捨てる（後から投げた方が先に返ることがある）
-      if (event.data.id !== latestRequestId.current) return
+      if (event.data.requestId !== latestRequestId.current) return
       setState({ data: event.data.result, pending: false })
     })
 
@@ -44,12 +44,12 @@ export function useAggregate(items: Product[]): AggregateState {
     const worker = workerRef.current
     if (!worker) return
 
-    const id = ++latestRequestId.current
-    // 'p-01234' → 1233。商品そのものではなく番号だけを渡すので、転送コストがほぼゼロ
-    const indices = Int32Array.from(items, (item) => Number(item.id.slice(2)) - 1)
+    const requestId = ++latestRequestId.current
+    // 商品そのものではなく id だけを渡すので、転送コストがほぼゼロ
+    const ids = Int32Array.from(items, (item) => item.id)
     setState((prev) => ({ ...prev, pending: true }))
-    const request: AggregateRequest = { id, indices }
-    worker.postMessage(request, [indices.buffer])
+    const request: AggregateRequest = { requestId, ids }
+    worker.postMessage(request, [ids.buffer])
   }, [items])
 
   return state

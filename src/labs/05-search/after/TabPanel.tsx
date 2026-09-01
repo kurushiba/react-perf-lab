@@ -15,7 +15,7 @@ interface TabPanelProps {
 }
 
 /**
- * `<Activity mode="hidden">` は、子を非表示にしても state と DOM を保持する（6-8）。
+ * `<Activity mode="hidden">` は、子を非表示にしても state と DOM を保持する（6-7）。
  *
  * `{tab === 'results' && <ResultList />}` との違いは、アンマウントが起きないこと。
  * 一覧が持っている並び順・開いている行はタブを行き来しても残り、

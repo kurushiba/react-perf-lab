@@ -4,7 +4,7 @@ import { formatRelative, formatYen } from '../types'
 interface DealRowProps {
   deal: Deal
   isSelected: boolean
-  /** 基準時刻は親から受け取る。レンダー中に Date.now() を呼ばない（9-3） */
+  /** 基準時刻は親から受け取る。レンダー中に Date.now() を呼ばない（8-3） */
   now: number
   onToggle: (id: string) => void
   onOpen: (id: string) => void

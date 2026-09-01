@@ -6,7 +6,7 @@ import Spinner from './Spinner'
 import { useFetch } from './useProducts'
 
 interface DetailPanelProps {
-  id: string | null
+  id: number | null
 }
 
 export default function DetailPanel({ id }: DetailPanelProps) {

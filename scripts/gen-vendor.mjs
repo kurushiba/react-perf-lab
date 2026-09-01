@@ -118,6 +118,84 @@ const UI_ICON_NAMES = [
   'IconClose',
 ]
 
+const round3 = (v) => Number(v.toFixed(3))
+
+/** 24グリッドの円。描画は stroke だけなので、円弧は3次ベジェ4本で近似する */
+function circle24(cx, cy, r) {
+  const k = r * 0.5523
+  const p = (x, y) => `${round3(x)} ${round3(y)}`
+  return (
+    `M${p(cx + r, cy)}` +
+    `C${p(cx + r, cy + k)} ${p(cx + k, cy + r)} ${p(cx, cy + r)}` +
+    `C${p(cx - k, cy + r)} ${p(cx - r, cy + k)} ${p(cx - r, cy)}` +
+    `C${p(cx - r, cy - k)} ${p(cx - k, cy - r)} ${p(cx, cy - r)}` +
+    `C${p(cx + k, cy - r)} ${p(cx + r, cy - k)} ${p(cx + r, cy)}Z`
+  )
+}
+
+/** 24グリッドの座標を viewBox 512 に変換する。使うのは M/L/C/Z だけなので、数値は一律で拡大してよい */
+function scaleTo512(d) {
+  return d
+    .replace(/-?\d+(?:\.\d+)?/g, (v) => ((Number(v) * 512) / 24).toFixed(1))
+    .replace(/\s+([MLCZ])/g, '$1')
+    .trim()
+}
+
+/**
+ * UIアイコン12個の実データ。ここだけは擬似乱数ではなく、手で描いた本物の形を使う。
+ * 24×24 のグリッドで設計し、書き出すときに viewBox 512 へ拡大する（線幅も 24 換算で 1.5 相当）。
+ *
+ * 教材の「初期JSサイズ」を支えているのは、あくまでバルクの2,000個（＝擬似乱数の高エントロピーな塊）。
+ * 画面に出るこの12個は 7KB ほどしかないので、見た目のためにここだけ実データにしても数字は動かない。
+ */
+const UI_ICON_SHAPES = {
+  // ペン
+  IconEditor: 'M4 20L5.2 15.8L16.4 4.6L19.4 7.6L8.2 18.8Z M15.3 5.7L18.3 8.7',
+  // 棒グラフ
+  IconReport: 'M3.5 20L20.5 20 M7.5 20L7.5 15.5 M12 20L12 11 M16.5 20L16.5 6.5',
+  // 画像（枠＋太陽＋山）
+  IconAssets:
+    'M5 4L19 4C20.1 4 21 4.9 21 6L21 18C21 19.1 20.1 20 19 20L5 20C3.9 20 3 19.1 3 18L3 6C3 4.9 3.9 4 5 4Z ' +
+    circle24(8.5, 9, 1.5) +
+    ' M4 18L9.5 12.5L13.5 16.5L16 14L20.5 18.5',
+  // スライダー3本
+  IconSettings:
+    'M3 7L21 7 M3 12L21 12 M3 17L21 17 ' +
+    circle24(9, 7, 2) +
+    ' ' +
+    circle24(15, 12, 2) +
+    ' ' +
+    circle24(7.5, 17, 2),
+  // ノード3つ＋接続線
+  IconShare:
+    circle24(18, 5.5, 2.2) +
+    ' ' +
+    circle24(6, 12, 2.2) +
+    ' ' +
+    circle24(18, 18.5, 2.2) +
+    ' M7.9 11L16.1 6.6 M7.9 13L16.1 17.4',
+  // 虫眼鏡
+  IconSearch: circle24(10.5, 10.5, 6.5) + ' M15.2 15.2L20.5 20.5',
+  // ベル
+  IconBell:
+    'M6 16.5C6 16.5 7 15.5 7 13.5L7 10C7 6.7 9.2 4 12 4C14.8 4 17 6.7 17 10L17 13.5C17 15.5 18 16.5 18 16.5Z ' +
+    'M10.2 19C10.6 19.9 11.2 20.4 12 20.4C12.8 20.4 13.4 19.9 13.8 19',
+  // 人
+  IconUser: circle24(12, 8.5, 3.8) + ' M4.5 20C4.5 16.4 7.9 13.5 12 13.5C16.1 13.5 19.5 16.4 19.5 20',
+  // ＋
+  IconPlus: 'M12 5L12 19 M5 12L19 12',
+  // ゴミ箱
+  IconTrash:
+    'M3.5 6.5L20.5 6.5 ' +
+    'M9.5 6.5L9.5 4.2C9.5 3.8 9.8 3.5 10.2 3.5L13.8 3.5C14.2 3.5 14.5 3.8 14.5 4.2L14.5 6.5 ' +
+    'M6 6.5L6.9 20C7 20.6 7.5 21 8.1 21L15.9 21C16.5 21 17 20.6 17.1 20L18 6.5 ' +
+    'M10 10.5L10.3 17.5 M14 10.5L13.7 17.5',
+  // チェック
+  IconCheck: 'M4.5 12.5L9.5 17.5L19.5 6.5',
+  // ×
+  IconClose: 'M6 6L18 18 M18 6L6 18',
+}
+
 function genIcons() {
   const rand = mulberry32(20250801)
   const names = []
@@ -126,19 +204,21 @@ function genIcons() {
     const lines = [
       HEADER(
         'shiba-icons / UIアイコン',
-        'アプリのUIでよく使う12個。バルクのアイコン群とは別モジュールにしてある。',
+        'アプリのUIでよく使う12個。ここだけは手で描いた実データで、バルクのアイコン群とは別モジュールにしてある。',
       ),
     ]
     for (const name of UI_ICON_NAMES) {
+      // バルクと同じ回数だけ乱数を引いて捨てる。
+      // ここで引くのをやめると乱数列がずれ、あとに続く2,000個の名前とパスが丸ごと変わってしまう
       const coord = () => (rand() * 512).toFixed(1)
-      let d = `M${coord()} ${coord()}`
+      coord()
+      coord()
       for (let s = 0; s < KNOBS.iconSegments; s++) {
-        d +=
-          s % 5 === 4
-            ? `C${coord()} ${coord()} ${coord()} ${coord()} ${coord()} ${coord()}`
-            : `L${coord()} ${coord()}`
+        const draws = s % 5 === 4 ? 6 : 2
+        for (let i = 0; i < draws; i++) coord()
       }
-      lines.push(`export const ${name} = '${d}Z'`)
+
+      lines.push(`export const ${name} = '${scaleTo512(UI_ICON_SHAPES[name])}'`)
     }
     write('shiba-icons/icons-ui.ts', lines.join('\n') + '\n')
   }
@@ -175,7 +255,7 @@ function genIcons() {
   const barrel = [
     HEADER(
       'shiba-icons / パスのバレル',
-      "全アイコンを1箇所に集めた再 export。`import * as` で丸ごと読むとバンドルから消せなくなる（8-6）。",
+      "全アイコンを1箇所に集めた再 export。`import * as` で丸ごと読むとバンドルから消せなくなる（7-6）。",
     ),
     "export * from './icons-ui'",
     ...Array.from(
@@ -198,7 +278,7 @@ export interface IconOptions {
 export function renderIcon(path: string, options: IconOptions = {}): string {
   const size = options.size ?? 20
   const color = options.color ?? 'currentColor'
-  const strokeWidth = options.strokeWidth ?? 18
+  const strokeWidth = options.strokeWidth ?? 32
 
   return (
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"' +

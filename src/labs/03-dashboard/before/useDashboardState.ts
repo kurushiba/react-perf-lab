@@ -26,7 +26,7 @@ export function useDashboardState() {
   const [theme, setTheme] = useState<Theme>('light')
   const [unreadCount, setUnreadCount] = useState(12)
   const [expanded, setExpanded] = useState<Record<string, boolean>>({})
-  const [selected, setSelected] = useState<Record<string, boolean>>({})
+  const [selected, setSelected] = useState<Record<number, boolean>>({})
 
   const filters: Filters = { keyword, category, owner, period, comparePeriod, minRevenue, sort }
   const rows = applyFilters(salesRows, filters)
@@ -40,7 +40,7 @@ export function useDashboardState() {
     setExpanded((prev) => ({ ...prev, [id]: !prev[id] }))
   }
 
-  const toggleSelected = (id: string) => {
+  const toggleSelected = (id: number) => {
     setSelected((prev) => ({ ...prev, [id]: !prev[id] }))
   }
 

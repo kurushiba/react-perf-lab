@@ -28,8 +28,8 @@ export interface AppContextValue {
   markAllRead: () => void
   expanded: Record<string, boolean>
   toggleExpanded: (id: string) => void
-  selected: Record<string, boolean>
-  toggleSelected: (id: string) => void
+  selected: Record<number, boolean>
+  toggleSelected: (id: number) => void
 }
 
 export const AppContext = createContext<AppContextValue | null>(null)

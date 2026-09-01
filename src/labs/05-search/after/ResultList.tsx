@@ -16,7 +16,7 @@ const SORTS: { id: SortKey; label: string }[] = [
 export default function ResultList({ items }: { items: Product[] }) {
   // 並び順と開いている行は、この一覧が自分で持っているローカルな状態
   const [sort, setSort] = useState<SortKey>('score')
-  const [openId, setOpenId] = useState<string | null>(null)
+  const [openId, setOpenId] = useState<number | null>(null)
 
   const shown = items.slice(0, VISIBLE)
   const sorted =

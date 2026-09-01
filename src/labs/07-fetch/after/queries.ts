@@ -24,7 +24,7 @@ export const productListQuery = (page: number, size: number) =>
     staleTime: FRESH_FOR,
   })
 
-export const productDetailQuery = (id: string) =>
+export const productDetailQuery = (id: number) =>
   queryOptions({
     queryKey: ['products', 'detail', id],
     queryFn: ({ signal }) => fetchProductDetail(id, signal),
@@ -32,7 +32,7 @@ export const productDetailQuery = (id: string) =>
   })
 
 /** 個別に取らず、まとめて1本にする（8-4） */
-export const productBatchQuery = (ids: string[]) =>
+export const productBatchQuery = (ids: number[]) =>
   queryOptions({
     queryKey: ['products', 'batch', ids.join(',')],
     queryFn: ({ signal }) => fetchProductsBatch(ids, signal),

@@ -1,3 +1,9 @@
+/**
+ * ⚠️ 講座から外した旧 Sec.8（データ取得とキャッシュ）の教材。
+ * `src/labs/registry.ts` から除外済みで、ラボ一覧にも URL にも出ない。
+ * レクチャー番号（8-1〜8-4）は旧体系のまま。経緯と復活手順は 目次.md の
+ * 「アーカイブ（講座から外したセクション）」節を参照。
+ */
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 /**

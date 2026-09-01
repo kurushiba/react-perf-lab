@@ -4,8 +4,8 @@ import Spinner from './Spinner'
 import { useFetch } from './useProducts'
 
 interface ProductListProps {
-  selectedId: string | null
-  onSelect: (id: string) => void
+  selectedId: number | null
+  onSelect: (id: number) => void
 }
 
 export default function ProductList({ selectedId, onSelect }: ProductListProps) {

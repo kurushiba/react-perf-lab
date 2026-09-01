@@ -3,8 +3,8 @@ import { LIST_PAGE, LIST_SIZE, formatYen } from '../config'
 import { productDetailQuery, productListQuery } from './queries'
 
 interface ProductListProps {
-  selectedId: string | null
-  onSelect: (id: string) => void
+  selectedId: number | null
+  onSelect: (id: number) => void
 }
 
 export default function ProductList({ selectedId, onSelect }: ProductListProps) {
@@ -23,7 +23,9 @@ export default function ProductList({ selectedId, onSelect }: ProductListProps) 
           }}
           // マウスが乗った時点で詳細を取りに行く。
           // 実際の通信時間は変わらないが、クリックした時にはもう届いている（8-5）
-          onMouseEnter={() => void queryClient.prefetchQuery(productDetailQuery(item.id))}
+          onMouseEnter={() => {
+            queryClient.prefetchQuery(productDetailQuery(item.id))
+          }}
           onClick={() => onSelect(item.id)}
         >
           <span className="row__main">

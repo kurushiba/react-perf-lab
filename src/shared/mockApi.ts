@@ -6,7 +6,7 @@
 import type { Category, Product } from '../data/products'
 
 export interface ProductSummary {
-  id: string
+  id: number
   name: string
   sku: string
   category: Category
@@ -16,7 +16,7 @@ export interface ProductSummary {
 }
 
 export interface ProductDetail extends Product {
-  relatedIds: string[]
+  relatedIds: number[]
 }
 
 export interface Page<T> {
@@ -43,17 +43,17 @@ export function fetchProductPage(
   return get(`/api/products?${params}`, options.signal)
 }
 
-export function fetchProductDetail(id: string, signal?: AbortSignal): Promise<ProductDetail> {
+export function fetchProductDetail(id: number, signal?: AbortSignal): Promise<ProductDetail> {
   return get(`/api/products/${id}`, signal)
 }
 
 /** 09章 after で N+1 を1リクエストに畳むためのエンドポイント */
-export function fetchProductsBatch(ids: string[], signal?: AbortSignal): Promise<ProductDetail[]> {
+export function fetchProductsBatch(ids: number[], signal?: AbortSignal): Promise<ProductDetail[]> {
   return get(`/api/products/batch?ids=${ids.join(',')}`, signal)
 }
 
-export async function toggleFavorite(id: string): Promise<{ id: string; ok: boolean }> {
+export async function toggleFavorite(id: number): Promise<{ id: number; ok: boolean }> {
   const res = await fetch(`/api/products/${id}/favorite`, { method: 'POST' })
   if (!res.ok) throw new Error(`${res.status} favorite`)
-  return (await res.json()) as { id: string; ok: boolean }
+  return (await res.json()) as { id: number; ok: boolean }
 }

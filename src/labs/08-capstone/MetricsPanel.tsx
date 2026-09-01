@@ -13,7 +13,7 @@ interface MetricsPanelProps {
 }
 
 /**
- * 9-2 / 9-8 で読む5指標のうち、DOMノード数と commit 時間を画面に出す。
+ * 8-2 / 8-8 で読む5指標のうち、DOMノード数と commit 時間を画面に出す。
  * （初期JSサイズは BundlePanel、LCP と INP は VitalsPanel が担当する）
  *
  * 04-inventory/MeasurePanel.tsx と同じで、記録するのはレンダー中ではなく

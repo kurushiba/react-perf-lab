@@ -13,7 +13,7 @@ import { mulberry32, products, type Category } from '../../data/products'
 export const ROW_COUNT = 500
 
 export interface SalesRow {
-  id: string
+  id: number
   name: string
   sku: string
   category: Category

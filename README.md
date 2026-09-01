@@ -69,9 +69,9 @@ npm run build && npm run preview
 
 （Slow 4G ＋ CPU 4x ＝ Lighthouse 既定相当のスロットリング下での実測値）
 
-### `08-capstone`（Sec.9）の5指標
+### `08-capstone`（Sec.8）の5指標
 
-Sec.9 で受講者が到達する数値です。`before` は Sec.0-1 のデモ素材も兼ねています。
+Sec.8 で受講者が到達する数値です。`before` は Sec.0-1 のデモ素材も兼ねています。
 
 | 指標 | `08-capstone/before` | `08-capstone/after` | 計測条件 |
 |---|---|---|---|
@@ -81,8 +81,8 @@ Sec.9 で受講者が到達する数値です。`before` は Sec.0-1 のデモ�
 | DOMノード数 | 50,166 | 386 | — |
 | 主要操作の commit（チェック1回） | 211ms | 19ms | **dev**（本番ビルドは `<Profiler>` の値が 0 になります） |
 
-`after` の INP 32ms は **React Compiler を有効にした状態**の値です（Sec.9-3 で有効化するので、
-Sec.9 を通した最終状態と一致します）。無効のままでも 248ms まで下がります。
+`after` の INP 32ms は **React Compiler を有効にした状態**の値です（`8-3` で有効化するので、
+Sec.8 を通した最終状態と一致します）。無効のままでも 248ms まで下がります。
 
 ---
 
@@ -122,8 +122,7 @@ React DevTools の Components タブでコンポーネント名の横に **Memo 
 | `src/labs/04-inventory/` | Sec.5 | 10,000行の一覧を仮想化する |
 | `src/labs/05-search/` | Sec.6 | 重い計算とメインスレッド、並行機能 |
 | `src/labs/06-suite/` | Sec.7 | バンドルサイズと読み込み最適化 |
-| `src/labs/07-fetch/` | Sec.8 | データ取得とキャッシュ |
-| `src/labs/08-capstone/` | Sec.0・Sec.9 | 5種のボトルネックが同居した総仕上げアプリ |
+| `src/labs/08-capstone/` | Sec.0・Sec.8 | 5種のボトルネックが同居した総仕上げアプリ |
 
 ラボ番号とセクション番号は一致しません（ラボは01からの通し番号です）。
 
@@ -145,7 +144,7 @@ URL で直接開くこともできます：`/labs/04-inventory/before`
 ## 構成メモ
 
 - `src/data/products.ts` … 10,000件の商品データ。シード付きの決定的な擬似乱数で生成しているので、実行のたびに同じデータになります（計測値の再現性のため）
-- `src/data/deals.ts` … `08-capstone`（Shiba CRM）用の 5,000 案件と、そこにぶら下がる活動メモ約 55,000 件（合計およそ1,500万文字）。同じく決定的生成です。検索がこのメモを全件走査するので、この文字数がそのまま Sec.9 の「重い検索」の実体になります
+- `src/data/deals.ts` … `08-capstone`（Shiba CRM）用の 5,000 案件と、そこにぶら下がる活動メモ約 55,000 件（合計およそ1,500万文字）。同じく決定的生成です。検索がこのメモを全件走査するので、この文字数がそのまま Sec.8 の「重い検索」の実体になります
 - `plugins/mock-api.ts` … Vite サーバ内のモックAPI。`/api/*` を**実HTTP**で返すので、Network パネルにリクエストがそのまま並びます。教材内で唯一 `setTimeout` による遅延偽装を許可している場所です
 - `src/vendor/` … Sec.7 用の「意図的に重い依存」。実在ライブラリのバージョン変動で教材が壊れないよう、自作のモックライブラリを生成して使っています（`shiba-icons` / `shiba-markdown` / `shiba-charts` / `shiba-qr` / `shiba-date` の5つ、合計 raw 約2.2MB）。中身は実際に動く実装＋高エントロピーなデータで、`npm run gen:vendor` で決定的に再生成できます
 - `public/images/` … 教材用に生成した画像。`photos/photo-N.png` は非最適な大きいPNG（1280×960 / 約1.33MB）で、LCP / CLS の題材に使います。`photos/photo-N-720.png` は同じ絵柄を実際の表示サイズ（720×540 / 約169KB）で書き出したもので、Sec.7-7 の `after` が使います

@@ -46,8 +46,12 @@ export default function MarkdownEditor() {
         <button
           className="button"
           // 押される前に取りに行っておく。押した瞬間には届いている
-          onMouseEnter={() => void loadChartPanel()}
-          onFocus={() => void loadChartPanel()}
+          onMouseEnter={() => {
+            loadChartPanel()
+          }}
+          onFocus={() => {
+            loadChartPanel()
+          }}
           onClick={() => setShowStats((prev) => !prev)}
         >
           {showStats ? '統計を隠す' : '統計を表示'}

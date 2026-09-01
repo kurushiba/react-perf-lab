@@ -3,7 +3,7 @@ import { notificationStore } from '../notification-store'
 import { BELL_ICON, icon } from '../icons'
 
 /**
- * Reactの外にあるストアは useSyncExternalStore で購読する（9-3）。
+ * Reactの外にあるストアは useSyncExternalStore で購読する（8-3）。
  * レンダー中に getSnapshot() を直接呼ぶと、値は読めても更新に気付けない。
  */
 export default function NotificationBell() {

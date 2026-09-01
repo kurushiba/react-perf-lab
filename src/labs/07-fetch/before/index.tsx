@@ -1,3 +1,9 @@
+/**
+ * ⚠️ 講座から外した旧 Sec.8（データ取得とキャッシュ）の教材。
+ * `src/labs/registry.ts` から除外済みで、ラボ一覧にも URL にも出ない。
+ * レクチャー番号（8-1〜8-4）は旧体系のまま。経緯と復活手順は 目次.md の
+ * 「アーカイブ（講座から外したセクション）」節を参照。
+ */
 import { useState } from 'react'
 import NetworkPanel from '../NetworkPanel'
 import { RACE_PAIR } from '../config'
@@ -20,7 +26,7 @@ const TABS = [
 
 export default function FetchBefore() {
   const [tab, setTab] = useState<string>(TABS[0].id)
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [selectedId, setSelectedId] = useState<number | null>(null)
   const current = TABS.find((item) => item.id === tab) ?? TABS[0]
 
   return (

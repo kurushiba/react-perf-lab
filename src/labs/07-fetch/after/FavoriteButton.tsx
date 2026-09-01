@@ -2,7 +2,7 @@ import { useOptimistic, useState, useTransition } from 'react'
 import { toggleFavorite } from '../../../shared/mockApi'
 
 interface FavoriteButtonProps {
-  id: string
+  id: number
 }
 
 /**

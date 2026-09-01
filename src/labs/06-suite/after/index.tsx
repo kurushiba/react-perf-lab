@@ -64,9 +64,6 @@ export default function SuiteAfter() {
             key={item.to}
             to={`${base}/${item.to}`}
             className="button"
-            // クリックされる前に取りに行っておく。実速度は変わらないが、待ち時間は消える
-            onMouseEnter={() => void loaders[item.to]()}
-            onFocus={() => void loaders[item.to]()}
             style={
               current?.to === item.to
                 ? { borderColor: 'var(--accent)', color: 'var(--accent)' }
@@ -83,8 +80,12 @@ export default function SuiteAfter() {
         <span style={{ flex: 1 }} />
         <button
           className="button"
-          onMouseEnter={() => void loadQrModal()}
-          onFocus={() => void loadQrModal()}
+          onMouseEnter={() => {
+            loadQrModal()
+          }}
+          onFocus={() => {
+            loadQrModal()
+          }}
           onClick={() => setShareOpen(true)}
         >
           共有

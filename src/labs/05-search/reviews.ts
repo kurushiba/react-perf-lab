@@ -8,7 +8,7 @@ import { mulberry32, products } from '../../data/products'
 
 export interface Review {
   id: string
-  productId: string
+  productId: number
   rating: number
   body: string
 }
@@ -45,9 +45,9 @@ function pick<T>(rand: () => number, list: readonly T[]): T {
   return list[Math.floor(rand() * list.length)]
 }
 
-function generateReviews(): Map<string, Review[]> {
+function generateReviews(): Map<number, Review[]> {
   const rand = mulberry32(778_899)
-  const byProduct = new Map<string, Review[]>()
+  const byProduct = new Map<number, Review[]>()
 
   for (const product of products) {
     // 0〜4件。レビューが1件も無い商品もある
@@ -68,11 +68,11 @@ function generateReviews(): Map<string, Review[]> {
   return byProduct
 }
 
-export const reviewsByProduct: Map<string, Review[]> = generateReviews()
+export const reviewsByProduct: Map<number, Review[]> = generateReviews()
 
 const NO_REVIEWS: Review[] = []
 
-export function reviewsOf(productId: string): Review[] {
+export function reviewsOf(productId: number): Review[] {
   return reviewsByProduct.get(productId) ?? NO_REVIEWS
 }
 

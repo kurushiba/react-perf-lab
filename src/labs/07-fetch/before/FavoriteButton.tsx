@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { toggleFavorite } from '../../../shared/mockApi'
 
 interface FavoriteButtonProps {
-  id: string
+  id: number
 }
 
 export default function FavoriteButton({ id }: FavoriteButtonProps) {

@@ -47,16 +47,18 @@ function toSummary(p: Product) {
  * 関連商品の中身を出すにはもう1往復必要になる（＝直列ウォーターフォールが生まれる）。
  */
 function toDetail(p: Product) {
-  const index = Number(p.id.slice(2)) - 1
+  // id は 1 始まりなので、配列の位置に直してから散らす
+  const index = p.id - 1
   const relatedIds = [1, 2, 3, 4].map(
     (offset) => products[(index + offset * 137) % products.length].id,
   )
   return { ...p, relatedIds }
 }
 
-function findById(id: string): Product | undefined {
-  const index = Number(id.slice(2)) - 1
-  return products[index]?.id === id ? products[index] : undefined
+const productById = new Map(products.map((p) => [p.id, p]))
+
+function findById(id: number): Product | undefined {
+  return productById.get(id)
 }
 
 async function handle(req: Connect.IncomingMessage, res: ServerResponse): Promise<boolean> {
@@ -86,9 +88,9 @@ async function handle(req: Connect.IncomingMessage, res: ServerResponse): Promis
     return true
   }
 
-  // GET /api/products/batch?ids=p-00001,p-00002   ← 09章 after で N+1 を潰すために使う
+  // GET /api/products/batch?ids=1,2   ← 09章 after で N+1 を潰すために使う
   if (path === '/api/products/batch') {
-    const ids = (query.get('ids') ?? '').split(',').filter(Boolean)
+    const ids = (query.get('ids') ?? '').split(',').filter(Boolean).map(Number)
     await sleep(latencyFor(`batch:${ids.length}`))
     json(
       res,
@@ -98,9 +100,9 @@ async function handle(req: Connect.IncomingMessage, res: ServerResponse): Promis
   }
 
   // GET /api/products/:id
-  const detailMatch = /^\/api\/products\/(p-\d+)$/.exec(path)
+  const detailMatch = /^\/api\/products\/(\d+)$/.exec(path)
   if (detailMatch) {
-    const product = findById(detailMatch[1])
+    const product = findById(Number(detailMatch[1]))
     if (!product) {
       await sleep(120)
       json(res, { message: 'not found' }, 404)
@@ -108,16 +110,16 @@ async function handle(req: Connect.IncomingMessage, res: ServerResponse): Promis
     }
     // 遅延を id から決めているので、「後から投げた方が先に返る」組み合わせが再現できる
     // （＝レースコンディションの教材が毎回同じように再現する）
-    await sleep(latencyFor(product.id))
+    await sleep(latencyFor(String(product.id)))
     json(res, toDetail(product))
     return true
   }
 
   // POST /api/products/:id/favorite   ← useOptimistic の題材
-  const favoriteMatch = /^\/api\/products\/(p-\d+)\/favorite$/.exec(path)
+  const favoriteMatch = /^\/api\/products\/(\d+)\/favorite$/.exec(path)
   if (favoriteMatch && req.method === 'POST') {
     await sleep(latencyFor(`fav:${favoriteMatch[1]}`))
-    json(res, { id: favoriteMatch[1], ok: true })
+    json(res, { id: Number(favoriteMatch[1]), ok: true })
     return true
   }
 

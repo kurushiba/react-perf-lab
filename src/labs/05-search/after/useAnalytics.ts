@@ -1,13 +1,13 @@
-import { useEffect, useEffectEvent, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { sendAnalyticsEvent } from '../analytics'
 import type { Filters, TabId } from '../types'
 
 /**
- * 送信したいタイミング（検索語が変わったとき）と、
- * 送信に必要な値（フィルタ・件数・タブ）を切り離す。
+ * 検索したことを計測基盤に送る Effect。
  *
- * useEffectEvent の中で読む値は「最新のもの」が使われるが、依存配列には入らない。
- * 手動メモ化を足すのではなく、Effect の設計そのものを変えるアプローチ。
+ * 送りたいのは「検索語が変わったとき」だけなのに、送信するペイロードに必要な値が
+ * すべて依存配列に並んでしまっている。結果として、タブを切り替えただけ・
+ * フィルタを触っただけでも同じイベントが飛ぶ。
  */
 export function useAnalytics(
   query: string,
@@ -17,11 +17,11 @@ export function useAnalytics(
 ): number {
   const [sentCount, setSentCount] = useState(0)
 
-  const reportSearch = useEffectEvent((searchQuery: string) => {
+  useEffect(() => {
     setSentCount(
       sendAnalyticsEvent({
         name: 'search',
-        query: searchQuery,
+        query,
         category: filters.category,
         priceBand: filters.priceBand,
         stock: filters.stock,
@@ -29,11 +29,7 @@ export function useAnalytics(
         tab,
       }),
     )
-  })
-
-  useEffect(() => {
-    reportSearch(query)
-  }, [query])
+  }, [query, filters.category, filters.priceBand, filters.stock, resultCount, tab])
 
   return sentCount
 }

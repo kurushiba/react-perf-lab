@@ -1,7 +1,7 @@
 /**
  * 検索結果のカテゴリ別集計。
  *
- * before はこれをレンダー中にそのまま呼び、after は同じ関数を Web Worker から呼ぶ（6-7）。
+ * before はこれをレンダー中にそのまま呼び、after は同じ関数を Web Worker から呼ぶ（6-6）。
  * どちらも中身は変えていない ＝「計算を速くしたのではなく、置き場所を変えた」ことが分かるようにしてある。
  */
 import { CATEGORIES, CATEGORY_LABELS, type Category, type Product } from '../../data/products'

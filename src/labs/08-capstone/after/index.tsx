@@ -9,7 +9,7 @@ import { CrmProvider, useUser, useUserActions } from './contexts'
 import NotificationBell from './NotificationBell'
 
 /**
- * ルート単位のコード分割（9-7）。
+ * ルート単位のコード分割（8-7）。
  * 最初に出るのは案件一覧だけなので、レポート（shiba-charts）・活動履歴（shiba-markdown）・
  * 設定（shiba-icons 2,000個 ＋ shiba-date 60ロケール）は初期バンドルから外れる。
  */
@@ -49,8 +49,12 @@ function Shell() {
             key={item.to}
             to={`${base}/${item.to}`}
             className="button"
-            onMouseEnter={() => void loaders[item.to as keyof typeof loaders]()}
-            onFocus={() => void loaders[item.to as keyof typeof loaders]()}
+            onMouseEnter={() => {
+              loaders[item.to as keyof typeof loaders]()
+            }}
+            onFocus={() => {
+              loaders[item.to as keyof typeof loaders]()
+            }}
             style={
               current.to === item.to
                 ? { borderColor: 'var(--accent)', color: 'var(--accent)' }
@@ -107,7 +111,7 @@ function Page() {
         画面も件数も before と同じ。変えたのは「1回の操作でReactとブラウザにやらせる仕事の量」。
       </p>
 
-      <BundlePanel hint="この画面を出すために転送されたJSの合計（gzip後）。9-2 の「初期JSサイズ」。" />
+      <BundlePanel hint="この画面を出すために転送されたJSの合計（gzip後）。8-2 の「初期JSサイズ」。" />
       <VitalsPanel />
 
       <MetricsPanel hint="「リセットして計測」を押してから操作を1回だけ行い、commit 時間を読む">

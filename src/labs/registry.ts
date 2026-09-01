@@ -141,27 +141,9 @@ export const labs: LabDef[] = [
     ],
   },
   {
-    id: '07-fetch',
-    title: '一覧＋詳細のデータ取得',
-    section: 'Sec.8',
-    summary: 'ウォーターフォールとキャッシュなし取得を直す',
-    variants: [
-      {
-        id: 'before',
-        label: 'before',
-        load: lazy(() => import('./07-fetch/before/index')),
-      },
-      {
-        id: 'after',
-        label: 'after',
-        load: lazy(() => import('./07-fetch/after/index')),
-      },
-    ],
-  },
-  {
     id: '08-capstone',
     title: 'Shiba CRM：総仕上げ',
-    section: 'Sec.0・Sec.9',
+    section: 'Sec.0・Sec.8',
     summary: '5種のボトルネックが同居したアプリを、自力で診断して直す',
     variants: [
       {

@@ -31,7 +31,8 @@ export const CATEGORY_LABELS: Record<Category, string> = {
 }
 
 export interface Product {
-  id: string
+  /** 1 始まりの連番。配列の位置（0 始まり）とは別物なので、id から引くときは Map を作る */
+  id: number
   name: string
   sku: string
   category: Category
@@ -115,7 +116,7 @@ export function generateProducts(count = 10_000, seed = 20260727): Product[] {
     const description = Array.from({ length: sentenceCount }, () => pick(rand, SENTENCES)).join(' ')
 
     items.push({
-      id: `p-${String(i + 1).padStart(5, '0')}`,
+      id: i + 1,
       name,
       sku: `${category.slice(0, 3).toUpperCase()}-${String(Math.floor(rand() * 9000) + 1000)}-${String(i + 1).padStart(5, '0')}`,
       category,

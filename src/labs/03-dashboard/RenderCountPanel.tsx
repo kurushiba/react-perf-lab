@@ -10,7 +10,7 @@ import { Profiler, useEffect, useState, type ProfilerOnRenderCallback, type Reac
  * 表示は回数・時間ともレンダー基準で揃えてある。`onRender` はコミット時に呼ばれるので
  * 厳密には「コミットまで到達したレンダー」の回数と、その際のレンダーフェーズの所要時間
  * （`actualDuration`）で、DOM 反映＝コミットフェーズのコストは含まない。
- * このラボには useTransition / useDeferredValue / memo がないので、レンダーしたのに
+ * このラボには useTransition / memo がないので、レンダーしたのに
  * コミットされない領域は発生せず、「レンダーした領域」と読んで差し支えない。
  *
  * 04-inventory/MeasurePanel.tsx と同じで、記録するのはレンダー中ではなく

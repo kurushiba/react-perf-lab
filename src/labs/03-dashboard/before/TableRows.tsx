@@ -5,8 +5,8 @@ import { useAppContext } from './AppContext'
 
 interface TableRowProps {
   row: SalesRow
-  selected: Record<string, boolean>
-  onToggle: (id: string) => void
+  selected: Record<number, boolean>
+  onToggle: (id: number) => void
 }
 
 function TableRow({ row, selected, onToggle }: TableRowProps) {

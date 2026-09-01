@@ -6,7 +6,7 @@ import RelatedList from './RelatedList'
 import { DetailSkeleton } from './Skeleton'
 import { productDetailQuery } from './queries'
 
-function DetailBody({ id }: { id: string }) {
+function DetailBody({ id }: { id: number }) {
   // 一覧の hover で先読み済みなら、ここは待たずに返る
   const { data } = useSuspenseQuery(productDetailQuery(id))
 
@@ -33,7 +33,7 @@ function DetailBody({ id }: { id: string }) {
 }
 
 interface DetailPanelProps {
-  id: string | null
+  id: number | null
 }
 
 export default function DetailPanel({ id }: DetailPanelProps) {

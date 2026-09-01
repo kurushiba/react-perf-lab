@@ -3,7 +3,7 @@ import { formatYen } from '../config'
 import Spinner from './Spinner'
 import { useFetch } from './useProducts'
 
-function RelatedCard({ id }: { id: string }) {
+function RelatedCard({ id }: { id: number }) {
   const { data } = useFetch<ProductDetail>(`/api/products/${id}`)
 
   if (!data) {
@@ -26,7 +26,7 @@ function RelatedCard({ id }: { id: string }) {
 }
 
 interface RelatedListProps {
-  ids: string[]
+  ids: number[]
 }
 
 export default function RelatedList({ ids }: RelatedListProps) {

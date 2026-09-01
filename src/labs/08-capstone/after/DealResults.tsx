@@ -4,7 +4,7 @@ import { useSelection, useSelectionActions } from './contexts'
 import DealList from './DealList'
 
 interface DealResultsProps {
-  /** 後回しにされた検索語。打鍵直後は1つ前の値のまま渡ってくる */
+  /** 検索語。更新が低優先度に落ちているので、打鍵直後は1つ前の値のまま渡ってくる */
   query: string
   stage: Stage | 'all'
   owner: Owner | 'all'
@@ -30,10 +30,10 @@ function SelectionSummary() {
 /**
  * 重い走査をここに閉じ込める。props が変わらない限り Compiler が丸ごと止めるので、
  * 打鍵の緊急更新（入力欄に文字が出るだけ）ではこの中は動かない。
- * 走査そのものは before と同じ searchDeals（9-6 では1行も変えない）。
+ * 走査そのものは before と同じ searchDeals（8-6 では1行も変えない）。
  *
- * ★「結果が古い」フラグをここの props に混ぜてはいけない。
- *   打鍵のたびに props が変わってしまい、後回しにしたはずの走査が
+ * ★ `isPending` のような「打鍵のたびに変わる値」をここの props に混ぜてはいけない。
+ *   props が毎回変わってしまい、後回しにしたはずの走査が
  *   緊急更新でも走る（＝1打鍵で2回走る）。薄く見せるのは親の側でやる。
  */
 export default function DealResults({ query, stage, owner, industry }: DealResultsProps) {

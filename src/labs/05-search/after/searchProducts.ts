@@ -74,7 +74,7 @@ export function searchProducts(query: string, filters: Filters): Product[] {
     if (score > 0) hits.push({ product, score })
   }
 
-  hits.sort((a, b) => b.score - a.score || a.product.id.localeCompare(b.product.id))
+  hits.sort((a, b) => b.score - a.score || a.product.id - b.product.id)
 
   console.log(
     `[compute] searchProducts "${query}" ${hits.length}件 ${(performance.now() - startedAt).toFixed(0)}ms`,

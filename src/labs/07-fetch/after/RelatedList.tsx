@@ -3,7 +3,7 @@ import { formatYen } from '../config'
 import { productBatchQuery } from './queries'
 
 interface RelatedListProps {
-  ids: string[]
+  ids: number[]
 }
 
 /**

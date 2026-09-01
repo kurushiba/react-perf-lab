@@ -5,6 +5,7 @@ import { aggregateProducts } from '../aggregate'
 import { totalReviewCount } from '../reviews'
 import { DEFAULT_FILTERS, type Filters, type TabId } from '../types'
 import CategoryChart from './CategoryChart'
+import FacetMatrix from './FacetMatrix'
 import FilterPanel from './FilterPanel'
 import SearchInput from './SearchInput'
 import TabPanel from './TabPanel'
@@ -47,6 +48,8 @@ export default function SearchBefore() {
       </p>
 
       <TabPanel tab={tab} onChange={setTab} results={results} summary={summary} history={history} />
+
+      <FacetMatrix filters={filters} />
     </div>
   )
 }
