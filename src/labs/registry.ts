@@ -143,7 +143,7 @@ export const labs: LabDef[] = [
   {
     id: '08-capstone',
     title: 'Shiba CRM：総仕上げ',
-    section: 'Sec.0・Sec.8',
+    section: 'Sec.8',
     summary: '5種のボトルネックが同居したアプリを、自力で診断して直す',
     variants: [
       {

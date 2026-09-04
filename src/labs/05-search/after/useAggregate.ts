@@ -46,7 +46,8 @@ export function useAggregate(items: Product[]): AggregateState {
 
     const requestId = ++latestRequestId.current
     // 商品そのものではなく id だけを渡すので、転送コストがほぼゼロ
-    const ids = Int32Array.from(items, (item) => item.id)
+    const productIds = items.map((item) => item.id)
+    const ids = Int32Array.from(productIds)
     setState((prev) => ({ ...prev, pending: true }))
     const request: AggregateRequest = { requestId, ids }
     worker.postMessage(request, [ids.buffer])

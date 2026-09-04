@@ -8,12 +8,11 @@ export default function AssetsPage() {
       <div className="panel">
         <h3>アイコン</h3>
         <div className="toolbar">
-          {UI_ICONS.map((name) => (
+          {UI_ICONS.map((item) => (
             <span
-              key={name}
-              title={name}
+              key={item}
               style={{ display: 'inline-flex', padding: 6 }}
-              dangerouslySetInnerHTML={{ __html: icon(name, 22) }}
+              dangerouslySetInnerHTML={{ __html: icon(item, 22) }}
             />
           ))}
         </div>

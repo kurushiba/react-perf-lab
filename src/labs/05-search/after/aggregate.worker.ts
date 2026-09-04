@@ -30,6 +30,7 @@ const productById = new Map(products.map((product) => [product.id, product]))
 
 ctx.addEventListener('message', (event: MessageEvent<AggregateRequest>) => {
   const { requestId, ids } = event.data
-  const items = Array.from(ids, (productId) => productById.get(productId)!)
+  const productIds = Array.from(ids)
+  const items = productIds.map((productId) => productById.get(productId)!)
   ctx.postMessage({ requestId, result: aggregateProducts(items) } satisfies AggregateResponse)
 })

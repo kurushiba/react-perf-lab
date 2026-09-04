@@ -20,16 +20,15 @@ const loaders = {
   report: () => import('./ReportPage'),
   assets: () => import('./AssetsPage'),
   settings: () => import('./SettingsPage'),
+  // モーダルは開くまで要らない。QRライブラリごと切り離す（7-5）
+  qrModal: () => import('./QrModal'),
 }
 
 const MarkdownEditor = lazy(loaders.editor)
 const ReportPage = lazy(loaders.report)
 const AssetsPage = lazy(loaders.assets)
 const SettingsPage = lazy(loaders.settings)
-
-// モーダルは開くまで要らない。QRライブラリごと切り離す（7-5）
-const loadQrModal = () => import('./QrModal')
-const QrModal = lazy(loadQrModal)
+const QrModal = lazy(loaders.qrModal)
 
 /** fallback に高さを持たせておくと、中身が届いたときに下がずれない */
 function RouteFallback() {
@@ -81,10 +80,10 @@ export default function SuiteAfter() {
         <button
           className="button"
           onMouseEnter={() => {
-            loadQrModal()
+            loaders.qrModal()
           }}
           onFocus={() => {
-            loadQrModal()
+            loaders.qrModal()
           }}
           onClick={() => setShareOpen(true)}
         >
